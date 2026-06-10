@@ -457,8 +457,7 @@
     <button class="tab-btn" id="btn-mars"         onclick="switchTab('mars')">🎵 MARS</button>
     <button class="tab-btn" id="btn-videoedukasi" onclick="switchTab('videoedukasi')">🎬 Video</button>
     <button class="tab-btn" id="btn-mlbb"      onclick="switchTab('mlbb')">🎮 MLBB</button>
-    <button class="tab-btn" id="btn-karaoke"   onclick="switchTab('karaoke')">🎤 Karaoke</button>
-    <button class="tab-btn" id="btn-busana"    onclick="switchTab('busana')">👗 Busana</button>
+    <button class="tab-btn" id="btn-karaoke"   onclick="switchTab('karaoke')">🎤 Karaoke &amp; Busana</button>
     <button class="tab-btn" id="btn-jadwal"    onclick="switchTab('jadwal')">📋 Jadwal</button>
   </div>
 </div>
@@ -715,18 +714,21 @@
     </div>
   </div>
 
-  <!-- ══ KARAOKE ══ -->
+  <!-- ══ KARAOKE & BUSANA ══ -->
   <div class="tab-panel" id="panel-karaoke">
-    <div class="section-title"><h3>🎤 Karaoke</h3><span class="pill">Turnamen</span></div>
-    <div class="bracket-info"><p>Jadwal dan data pertandingan <strong>Karaoke</strong> akan segera diumumkan oleh panitia. Pantau terus halaman ini untuk informasi terbaru.</p></div>
-    <div class="empty-state"><div class="icon">🎤</div><p>Data belum tersedia.<br>Hubungi panitia untuk info terbaru.</p></div>
-  </div>
-
-  <!-- ══ BUSANA ══ -->
-  <div class="tab-panel" id="panel-busana">
-    <div class="section-title"><h3>👗 Busana</h3><span class="pill">Turnamen</span></div>
-    <div class="bracket-info"><p>Jadwal dan data pertandingan <strong>Busana</strong> akan segera diumumkan oleh panitia. Pantau terus halaman ini untuk informasi terbaru.</p></div>
-    <div class="empty-state"><div class="icon">👗</div><p>Data belum tersedia.<br>Hubungi panitia untuk info terbaru.</p></div>
+    <div class="section-title"><h3>🎤 Karaoke &amp; Busana</h3><span class="pill">Turnamen</span></div>
+    <div class="sub-tabs">
+      <button class="sub-btn active" id="sbtn-karaoke" onclick="switchSub('karaoke','karaoke')">🎤 Karaoke</button>
+      <button class="sub-btn" id="sbtn-busana" onclick="switchSub('busana','karaoke')">👗 Busana</button>
+    </div>
+    <div class="sub-panel active" id="sub-karaoke">
+      <div class="bracket-info"><p>Jadwal dan data pertandingan <strong>Karaoke</strong> akan segera diumumkan oleh panitia. Pantau terus halaman ini untuk informasi terbaru.</p></div>
+      <div class="empty-state"><div class="icon">🎤</div><p>Data belum tersedia.<br>Hubungi panitia untuk info terbaru.</p></div>
+    </div>
+    <div class="sub-panel" id="sub-busana">
+      <div class="bracket-info"><p>Jadwal dan data pertandingan <strong>Busana</strong> akan segera diumumkan oleh panitia. Pantau terus halaman ini untuk informasi terbaru.</p></div>
+      <div class="empty-state"><div class="icon">👗</div><p>Data belum tersedia.<br>Hubungi panitia untuk info terbaru.</p></div>
+    </div>
   </div>
 
   <!-- ══ JADWAL ══ -->
@@ -849,9 +851,24 @@ function switchTab(panelId) {
 }
 
 function switchSub(subId, parentTab) {
-  const prefix = parentTab === 'badminton' ? 'ganda' : 'pp';
-  document.querySelectorAll(`[id^="sub-${prefix}-"]`).forEach(p => p.classList.remove('active'));
-  document.querySelectorAll(`[id^="sbtn-${prefix}-"]`).forEach(b => b.classList.remove('active'));
+  let prefix;
+  if (parentTab === 'badminton') prefix = 'ganda';
+  else if (parentTab === 'pimpong') prefix = 'pp';
+  else if (parentTab === 'karaoke') prefix = 'karaoke-or-busana';
+
+  // For karaoke tab, manually handle since ids don't share a clean prefix
+  if (parentTab === 'karaoke') {
+    ['karaoke','busana'].forEach(id => {
+      const p = document.getElementById('sub-' + id);
+      const b = document.getElementById('sbtn-' + id);
+      if (p) p.classList.remove('active');
+      if (b) b.classList.remove('active');
+    });
+  } else {
+    document.querySelectorAll(`[id^="sub-${prefix}-"]`).forEach(p => p.classList.remove('active'));
+    document.querySelectorAll(`[id^="sbtn-${prefix}-"]`).forEach(b => b.classList.remove('active'));
+  }
+
   const subEl = document.getElementById('sub-' + subId);
   const sbtnEl = document.getElementById('sbtn-' + subId);
   if (subEl) subEl.classList.add('active');
