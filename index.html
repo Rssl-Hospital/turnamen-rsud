@@ -127,6 +127,8 @@
   }
   .tab-btn:active { color: var(--text); }
   .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+  /* Tab dikunci (tidak punya akses) */
+  .tab-btn.no-access { opacity: 0.35; cursor: default; }
 
   /* ── CONTENT ── */
   .content { max-width: 700px; margin: 0 auto; padding: 16px 12px 100px; }
@@ -155,6 +157,15 @@
 
   .score-locked { pointer-events: none; opacity: 0.45; }
 
+  /* ── NO-ACCESS PANEL ── */
+  .no-access-panel {
+    text-align: center; padding: 50px 20px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px; margin-top: 8px;
+  }
+  .no-access-panel .icon { font-size: 48px; margin-bottom: 14px; }
+  .no-access-panel h4 { font-size: 16px; font-weight: 700; color: var(--red); margin-bottom: 8px; }
+  .no-access-panel p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
   /* ── SECTION TITLE ── */
   .section-title { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
   .section-title h3 { font-family: 'Bebas Neue', cursive; font-size: 20px; letter-spacing: 2px; color: #fff; }
@@ -182,7 +193,6 @@
   .status-playing { background: rgba(76,175,80,0.15); color: var(--green); }
   .status-done { background: rgba(245,166,35,0.15); color: var(--gold); }
 
-  /* Mobile-first match body: stack vertically on small screens */
   .match-body {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -198,7 +208,6 @@
     border-radius: 8px; color: var(--gold); font-family: 'Bebas Neue', cursive; font-size: 28px;
     text-align: center; outline: none; transition: all 0.2s; -moz-appearance: textfield;
     -webkit-appearance: none; touch-action: manipulation;
-    /* Larger tap target */
   }
   .score-input::-webkit-outer-spin-button, .score-input::-webkit-inner-spin-button { -webkit-appearance: none; }
   .score-input:focus { border-color: var(--gold); background: #0d2040; }
@@ -215,7 +224,6 @@
   .rr-group-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
   .rr-rounds { display: flex; flex-direction: column; gap: 8px; }
 
-  /* RR match: stack pada mobile */
   .rr-match {
     background: var(--card); border: 1px solid var(--border); border-radius: 8px;
     padding: 10px 12px;
@@ -253,7 +261,6 @@
   }
   .mlbb-match.has-winner { border-left: 3px solid var(--gold); }
 
-  /* MLBB: time on top, then teams + score */
   .mlbb-inner {
     display: grid;
     grid-template-columns: 64px 1fr auto 1fr;
@@ -325,43 +332,27 @@
   .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
   .empty-state p { color: var(--muted); font-size: 14px; line-height: 1.6; }
 
-  /* ── JADWAL UPLOAD ── */
-  #jadwal-dropzone {
-    border: 2px dashed var(--border); border-radius: 10px; padding: 28px 16px;
-    text-align: center; cursor: pointer; transition: all 0.2s; background: rgba(7,24,48,0.5);
-    touch-action: manipulation;
-  }
-
   /* ════════════════════════════════
      RESPONSIVE BREAKPOINTS
      ════════════════════════════════ */
-
-  /* Small phones (≤ 400px) */
   @media (max-width: 400px) {
     header h1 { font-size: 22px; }
     header h2 { font-size: 13px; }
-
     .match-body { gap: 6px; }
     .team-name { font-size: 11px; }
     .score-input { width: 46px; height: 46px; font-size: 24px; }
-
     .rr-match { grid-template-columns: 44px 1fr auto 1fr; gap: 5px; }
     .rr-team { font-size: 10px; }
     .score-sm { width: 38px; height: 38px; font-size: 20px; }
     .round-label { font-size: 8px; padding: 2px 4px; }
-
     .mlbb-inner { grid-template-columns: 54px 1fr auto 1fr; gap: 7px; }
     .mlbb-team { font-size: 10px; }
     .time-badge .time { font-size: 15px; }
   }
-
-  /* Medium phones (401–600px) */
   @media (min-width: 401px) and (max-width: 600px) {
     .score-input { width: 50px; height: 50px; }
     .mlbb-inner { grid-template-columns: 60px 1fr auto 1fr; }
   }
-
-  /* Tablet and up (≥ 601px) — restore more spacious layout */
   @media (min-width: 601px) {
     .content { padding: 24px 20px 100px; }
     header { padding: 28px 20px 22px; }
@@ -375,8 +366,6 @@
     .mlbb-team { font-size: 13px; }
     .match-card { padding: 14px 18px; }
   }
-
-  /* Very long team names: ensure no overflow */
   .rr-team, .mlbb-team, .team-name {
     word-break: break-word;
     overflow-wrap: anywhere;
@@ -390,14 +379,14 @@
   <div class="login-box">
     <div class="login-logo">
       <div class="badge">HUT KE-18</div>
-      <h2>Login</h2>
-      <p>Masuk sebagai Admin atau Panitia</p>
+      <h2>Login Panitia</h2>
+      <p>Masuk sebagai Admin atau Panitia Cabang</p>
       <div style="margin-top:10px;background:rgba(26,58,107,0.5);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:left;">
         <div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:1px;margin-bottom:6px;">✅ HAK AKSES SETELAH LOGIN:</div>
         <div style="font-size:11px;color:var(--muted);line-height:1.8;">
           🔢 Update &amp; simpan skor pertandingan<br>
-          📁 Upload gambar jadwal<br>
-          🗑 Kelola foto jadwal
+          📁 Upload gambar jadwal cabang<br>
+          🔒 Akses sesuai cabang masing-masing
         </div>
       </div>
     </div>
@@ -423,9 +412,7 @@
     <span class="admin-label">MODE</span>
     <span class="admin-user" id="admin-username-display"></span>
   </div>
-  <div class="admin-caps">
-    <span>✅ Skor</span><span>·</span><span>📁 Jadwal</span>
-  </div>
+  <div class="admin-caps" id="admin-caps-display"></div>
   <button class="logout-btn" onclick="doLogout()">Keluar</button>
 </div>
 
@@ -449,16 +436,16 @@
 <!-- ═══════════════ NAV ═══════════════ -->
 <div class="nav-wrapper">
   <div class="main-tabs" id="main-tabs">
-    <button class="tab-btn" id="btn-badminton" onclick="switchTab('badminton')">🏸 Badminton</button>
-    <button class="tab-btn" id="btn-pimpong"   onclick="switchTab('pimpong')">🏓 Pimpong</button>
-    <button class="tab-btn" id="btn-nasigoreng"  onclick="switchTab('nasigoreng')">🍳 Nasi Goreng</button>
+    <button class="tab-btn" id="btn-badminton"    onclick="switchTab('badminton')">🏸 Badminton</button>
+    <button class="tab-btn" id="btn-pimpong"      onclick="switchTab('pimpong')">🏓 Pimpong</button>
+    <button class="tab-btn" id="btn-nasigoreng"   onclick="switchTab('nasigoreng')">🍳 Nasi Goreng</button>
     <button class="tab-btn" id="btn-gaple"        onclick="switchTab('gaple')">🀱 Gaple</button>
     <button class="tab-btn" id="btn-playstation"  onclick="switchTab('playstation')">🕹️ PS</button>
     <button class="tab-btn" id="btn-mars"         onclick="switchTab('mars')">🎵 MARS</button>
     <button class="tab-btn" id="btn-videoedukasi" onclick="switchTab('videoedukasi')">🎬 Video</button>
-    <button class="tab-btn" id="btn-mlbb"      onclick="switchTab('mlbb')">🎮 MLBB</button>
-    <button class="tab-btn" id="btn-karaoke"   onclick="switchTab('karaoke')">🎤 Karaoke &amp; Busana</button>
-    <button class="tab-btn" id="btn-jadwal"    onclick="switchTab('jadwal')">📋 Jadwal</button>
+    <button class="tab-btn" id="btn-mlbb"         onclick="switchTab('mlbb')">🎮 MLBB</button>
+    <button class="tab-btn" id="btn-karaoke"      onclick="switchTab('karaoke')">🎤 Karaoke &amp; Busana</button>
+    <button class="tab-btn" id="btn-jadwal"       onclick="switchTab('jadwal')">📋 Jadwal</button>
   </div>
 </div>
 
@@ -472,7 +459,6 @@
       <button class="sub-btn active" id="sbtn-ganda-putra" onclick="switchSub('ganda-putra','badminton')">Ganda Putra</button>
       <button class="sub-btn" id="sbtn-ganda-putri" onclick="switchSub('ganda-putri','badminton')">Ganda Putri</button>
     </div>
-
     <div class="sub-panel active" id="sub-ganda-putra">
       <div class="rr-group-title" style="margin-top:4px">Pertandingan — Pukul 15:00 WIB</div>
       <div class="matches-grid">
@@ -528,7 +514,6 @@
       <div class="rr-group-title">Semua Peserta Bracket</div>
       <div class="bracket-info"><p>Format: <strong>Double Elimination</strong>. Total 8 pasangan. Juara ditentukan dari babak final bracket atas &amp; bawah.</p></div>
     </div>
-
     <div class="sub-panel" id="sub-ganda-putri">
       <div class="rr-group-title" style="margin-top:4px">Pertandingan — Pukul 15:00 WIB</div>
       <div class="matches-grid">
@@ -722,11 +707,11 @@
       <button class="sub-btn" id="sbtn-busana" onclick="switchSub('busana','karaoke')">👗 Busana</button>
     </div>
     <div class="sub-panel active" id="sub-karaoke">
-      <div class="bracket-info"><p>Jadwal dan data pertandingan <strong>Karaoke</strong> akan segera diumumkan oleh panitia. Pantau terus halaman ini untuk informasi terbaru.</p></div>
+      <div class="bracket-info"><p>Jadwal dan data pertandingan <strong>Karaoke</strong> akan segera diumumkan oleh panitia.</p></div>
       <div class="empty-state"><div class="icon">🎤</div><p>Data belum tersedia.<br>Hubungi panitia untuk info terbaru.</p></div>
     </div>
     <div class="sub-panel" id="sub-busana">
-      <div class="bracket-info"><p>Jadwal dan data pertandingan <strong>Busana</strong> akan segera diumumkan oleh panitia. Pantau terus halaman ini untuk informasi terbaru.</p></div>
+      <div class="bracket-info"><p>Jadwal dan data pertandingan <strong>Busana</strong> akan segera diumumkan oleh panitia.</p></div>
       <div class="empty-state"><div class="icon">👗</div><p>Data belum tersedia.<br>Hubungi panitia untuk info terbaru.</p></div>
     </div>
   </div>
@@ -767,7 +752,7 @@
 <div class="lock-notice" id="lock-notice">
   <div class="inner">
     👁 Mode Penonton
-    <button onclick="showLoginOverlay()">🔑 Login Admin</button>
+    <button onclick="showLoginOverlay()">🔑 Login Panitia</button>
   </div>
 </div>
 
@@ -779,33 +764,194 @@ const SUPABASE_URL  = 'https://apuuuehtqbnjibvykwqj.supabase.co';
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwdXV1ZWh0cWJuamlidnlrd3FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwNTQ1MjEsImV4cCI6MjA5NjYzMDUyMX0.QWA0VA71kmFiXPel2aGu97IUyfUuX7nV6fLxiHmF948';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
-const ADMINS = { 'admin': 'rsud2026', 'panitia': 'sungaililin18' };
-let isAdmin = false, currentUser = null, currentPanel = null;
+// ══════════════════════════════════════════════════════════
+//  DAFTAR USER — password + tab yang boleh diakses
+//  allowedTabs: null  = akses semua (admin)
+//  allowedTabs: [...] = hanya tab dalam array
+//  canUploadJadwal: true = boleh upload di tab Jadwal global
+// ══════════════════════════════════════════════════════════
+const USERS = {
+  'admin': {
+    password: 'rsud2026',
+    label: 'ADMIN',
+    color: 'var(--gold)',
+    allowedTabs: null,          // null = semua tab
+    canUploadJadwal: true,
+    capsLabel: '✅ Semua Cabang'
+  },
+  'badminton': {
+    password: 'hut18_badminton',
+    label: 'PANITIA',
+    color: 'var(--cyan)',
+    allowedTabs: ['badminton', 'jadwal'],
+    canUploadJadwal: true,
+    capsLabel: '🏸 Badminton'
+  },
+  'pimpong': {
+    password: 'hut18_pimpong',
+    label: 'PANITIA',
+    color: 'var(--cyan)',
+    allowedTabs: ['pimpong', 'jadwal'],
+    canUploadJadwal: true,
+    capsLabel: '🏓 Pimpong'
+  },
+  'nasigoreng': {
+    password: 'hut18_nasigoreng',
+    label: 'PANITIA',
+    color: 'var(--cyan)',
+    allowedTabs: ['nasigoreng', 'jadwal'],
+    canUploadJadwal: true,
+    capsLabel: '🍳 Nasi Goreng'
+  },
+  'gaple': {
+    password: 'hut18_gaple',
+    label: 'PANITIA',
+    color: 'var(--cyan)',
+    allowedTabs: ['gaple', 'jadwal'],
+    canUploadJadwal: true,
+    capsLabel: '🀱 Gaple'
+  },
+  'playstation': {
+    password: 'hut18_playstation',
+    label: 'PANITIA',
+    color: 'var(--cyan)',
+    allowedTabs: ['playstation', 'jadwal'],
+    canUploadJadwal: true,
+    capsLabel: '🕹️ PlayStation'
+  },
+  'mars': {
+    password: 'hut18_mars',
+    label: 'PANITIA',
+    color: 'var(--cyan)',
+    allowedTabs: ['mars', 'jadwal'],
+    canUploadJadwal: true,
+    capsLabel: '🎵 MARS RSUD'
+  },
+  'videoedukasi': {
+    password: 'hut18_video',
+    label: 'PANITIA',
+    color: 'var(--cyan)',
+    allowedTabs: ['videoedukasi', 'jadwal'],
+    canUploadJadwal: true,
+    capsLabel: '🎬 Video Edukasi'
+  },
+  'mlbb': {
+    password: 'hut18_mlbb',
+    label: 'PANITIA',
+    color: 'var(--cyan)',
+    allowedTabs: ['mlbb', 'jadwal'],
+    canUploadJadwal: true,
+    capsLabel: '🎮 MLBB'
+  },
+  'karaoke': {
+    password: 'hut18_karaoke',
+    label: 'PANITIA',
+    color: 'var(--cyan)',
+    allowedTabs: ['karaoke', 'jadwal'],
+    canUploadJadwal: true,
+    capsLabel: '🎤 Karaoke & Busana'
+  }
+};
+
+let isAdmin = false;
+let currentUser = null;
+let currentUserData = null;   // objek USERS[currentUser]
+let currentPanel = null;
+
+// ── Cek apakah tab boleh diakses user yg login ──
+function tabAllowed(tabId) {
+  if (!isAdmin) return true;  // viewer bisa lihat semua (read-only)
+  if (!currentUserData) return false;
+  if (currentUserData.allowedTabs === null) return true; // admin semua
+  return currentUserData.allowedTabs.includes(tabId);
+}
+
+// ── Cek apakah tab bisa di-edit (score/upload) ──
+function tabEditable(tabId) {
+  if (!isAdmin) return false;
+  return tabAllowed(tabId);
+}
 
 function doLogin() {
-  const u = document.getElementById('login-user').value.trim();
+  const u = document.getElementById('login-user').value.trim().toLowerCase();
   const p = document.getElementById('login-pass').value;
-  if (ADMINS[u] && ADMINS[u] === p) {
-    isAdmin = true; currentUser = u;
-    try { sessionStorage.setItem('tournament_admin', u); } catch(e){}
+  const userData = USERS[u];
+
+  if (userData && userData.password === p) {
+    isAdmin = true;
+    currentUser = u;
+    currentUserData = userData;
+    try { sessionStorage.setItem('tournament_user', u); } catch(e){}
+
     document.getElementById('login-overlay').classList.add('hidden');
     document.getElementById('admin-bar').classList.add('show');
-    const roleLabel = u === 'admin' ? 'ADMIN' : 'PANITIA';
-    const roleColor = u === 'admin' ? 'var(--gold)' : 'var(--cyan)';
     document.getElementById('admin-username-display').innerHTML =
-      `— <span style="color:${roleColor};font-weight:800;">${roleLabel}</span> <span style="color:var(--muted);font-weight:400;">(${u})</span>`;
-    document.getElementById('save-bar').classList.remove('hidden');
+      `— <span style="color:${userData.color};font-weight:800;">${userData.label}</span> <span style="color:var(--muted);font-weight:400;">(${u})</span>`;
+    document.getElementById('admin-caps-display').innerHTML =
+      `<span>${userData.capsLabel}</span>`;
+
     document.getElementById('lock-notice').classList.add('hidden');
-    setInputsLocked(false);
-    const uploadBox = document.getElementById('jadwal-upload-box');
-    if (uploadBox) uploadBox.style.display = 'block';
-    showToast('✓ Login berhasil. Selamat datang, ' + u + '!', 'success');
     document.getElementById('login-error').textContent = '';
-    if (!currentPanel) switchTab('badminton');
+
+    // Render akses tab + inputs
+    applyAccessUI();
+    showToast('✓ Login berhasil. Selamat datang, ' + u + '!', 'success');
+
+    // Pindah ke tab pertama yang boleh diakses
+    const firstTab = currentUserData.allowedTabs
+      ? currentUserData.allowedTabs[0]
+      : 'badminton';
+    switchTab(firstTab);
   } else {
     document.getElementById('login-error').textContent = '✗ Username atau password salah.';
     document.getElementById('login-pass').value = '';
   }
+}
+
+function applyAccessUI() {
+  const allTabs = ['badminton','pimpong','nasigoreng','gaple','playstation','mars','videoedukasi','mlbb','karaoke','jadwal'];
+
+  allTabs.forEach(tabId => {
+    const btn = document.getElementById('btn-' + tabId);
+    if (!btn) return;
+    const editable = tabEditable(tabId);
+    btn.classList.toggle('no-access', isAdmin && !editable);
+  });
+
+  // Save bar: tampilkan hanya jika ada tab yang bisa diedit
+  const hasSomething = !isAdmin || currentUserData.allowedTabs === null || currentUserData.allowedTabs.some(t => t !== 'jadwal');
+  document.getElementById('save-bar').classList.toggle('hidden', !hasSomething);
+
+  // Upload jadwal box
+  const uploadBox = document.getElementById('jadwal-upload-box');
+  if (uploadBox) {
+    uploadBox.style.display = (isAdmin && currentUserData && currentUserData.canUploadJadwal) ? 'block' : 'none';
+  }
+
+  // Lock/unlock inputs berdasarkan tab yang aktif
+  updateInputsForCurrentTab();
+}
+
+function updateInputsForCurrentTab() {
+  // Semua input di-lock dulu
+  document.querySelectorAll('input[type="number"]').forEach(inp => {
+    inp.disabled = true;
+    inp.classList.add('score-locked');
+  });
+
+  if (!isAdmin) return;
+
+  // Unlock hanya input di panel yang boleh diedit
+  const allTabs = ['badminton','pimpong','nasigoreng','gaple','playstation','mars','videoedukasi','mlbb','karaoke'];
+  allTabs.forEach(tabId => {
+    if (!tabEditable(tabId)) return;
+    const panel = document.getElementById('panel-' + tabId);
+    if (!panel) return;
+    panel.querySelectorAll('input[type="number"]').forEach(inp => {
+      inp.disabled = false;
+      inp.classList.remove('score-locked');
+    });
+  });
 }
 
 function closeLoginOverlay() {
@@ -816,15 +962,24 @@ function closeLoginOverlay() {
 }
 
 function doLogout() {
-  isAdmin = false; currentUser = null;
-  try { sessionStorage.removeItem('tournament_admin'); } catch(e){}
+  isAdmin = false; currentUser = null; currentUserData = null;
+  try { sessionStorage.removeItem('tournament_user'); } catch(e){}
   document.getElementById('admin-bar').classList.remove('show');
   document.getElementById('save-bar').classList.add('hidden');
   document.getElementById('lock-notice').classList.remove('hidden');
   const uploadBox = document.getElementById('jadwal-upload-box');
   if (uploadBox) uploadBox.style.display = 'none';
-  setInputsLocked(true);
-  showToast('Keluar dari mode admin.', 'success');
+
+  // Reset semua tab button (hilangkan no-access)
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('no-access'));
+
+  // Lock semua input
+  document.querySelectorAll('input[type="number"]').forEach(inp => {
+    inp.disabled = true;
+    inp.classList.add('score-locked');
+  });
+
+  showToast('Keluar dari mode panitia.', 'success');
 }
 
 function showLoginOverlay() {
@@ -832,31 +987,25 @@ function showLoginOverlay() {
   document.getElementById('lock-notice').classList.add('hidden');
 }
 
-function setInputsLocked(locked) {
-  document.querySelectorAll('input[type="number"]').forEach(inp => {
-    inp.disabled = locked;
-    inp.classList.toggle('score-locked', locked);
-  });
-}
-
 function switchTab(panelId) {
+  // Jika login dan tab tidak boleh, tampilkan pesan tidak ada akses
+  if (isAdmin && !tabEditable(panelId)) {
+    // Tetap tampilkan panel tapi dengan overlay no-access
+    // (atau skip & beritahu user)
+    showToast('⛔ Akun Anda tidak punya akses ke tab ini.', 'error');
+    return;
+  }
+
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('panel-' + panelId).classList.add('active');
   const btn = document.getElementById('btn-' + panelId);
   btn.classList.add('active');
-  // Auto-scroll tab into view on mobile
   btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   currentPanel = panelId;
 }
 
 function switchSub(subId, parentTab) {
-  let prefix;
-  if (parentTab === 'badminton') prefix = 'ganda';
-  else if (parentTab === 'pimpong') prefix = 'pp';
-  else if (parentTab === 'karaoke') prefix = 'karaoke-or-busana';
-
-  // For karaoke tab, manually handle since ids don't share a clean prefix
   if (parentTab === 'karaoke') {
     ['karaoke','busana'].forEach(id => {
       const p = document.getElementById('sub-' + id);
@@ -865,10 +1014,10 @@ function switchSub(subId, parentTab) {
       if (b) b.classList.remove('active');
     });
   } else {
+    let prefix = parentTab === 'badminton' ? 'ganda' : 'pp';
     document.querySelectorAll(`[id^="sub-${prefix}-"]`).forEach(p => p.classList.remove('active'));
     document.querySelectorAll(`[id^="sbtn-${prefix}-"]`).forEach(b => b.classList.remove('active'));
   }
-
   const subEl = document.getElementById('sub-' + subId);
   const sbtnEl = document.getElementById('sbtn-' + subId);
   if (subEl) subEl.classList.add('active');
@@ -876,7 +1025,7 @@ function switchSub(subId, parentTab) {
 }
 
 function updateScore(input) {
-  if (!isAdmin) return;
+  if (input.disabled) return;
   const matchId = input.dataset.match;
   const card = document.querySelector(`.match-card[data-id="${matchId}"]`);
   if (!card) return;
@@ -903,7 +1052,7 @@ function updateScore(input) {
 }
 
 function updateScoreML(input) {
-  if (!isAdmin) return;
+  if (input.disabled) return;
   markFilled(input);
   const matchId = input.dataset.match;
   const card = document.querySelector(`.mlbb-match[data-id="${matchId}"]`);
@@ -913,7 +1062,7 @@ function updateScoreML(input) {
 }
 
 function markFilled(input) {
-  if (!isAdmin) return;
+  if (input.disabled) return;
   input.classList.toggle('filled', input.value !== '');
   const row = input.closest('.rr-match, .mlbb-match');
   if (!row) return;
@@ -922,20 +1071,30 @@ function markFilled(input) {
 }
 
 async function saveScores() {
+  if (!isAdmin) return;
   const btn = document.querySelector('.save-btn');
   if (btn) { btn.textContent = '⏳ Menyimpan...'; btn.disabled = true; }
+
+  // Hanya simpan skor dari tab yang boleh diedit oleh user ini
   const rows = [];
   document.querySelectorAll('input[type="number"]').forEach((inp, idx) => {
+    if (inp.disabled) return; // skip tab yang tidak boleh
     const key = inp.dataset.match ? `${inp.dataset.match}-${inp.dataset.side || idx}` : `inp-${idx}`;
     rows.push({ match_key: key, value: inp.value });
   });
-  const { error } = await sb.from('scores').upsert(rows, { onConflict: 'match_key' });
+
+  let error = null;
+  if (rows.length > 0) {
+    const res = await sb.from('scores').upsert(rows, { onConflict: 'match_key' });
+    error = res.error;
+  }
+
   if (btn) {
     btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Simpan Skor`;
     btn.disabled = false;
   }
-  if (error) { showToast('✗ Gagal menyimpan!', 'error'); }
-  else { showToast('✓ Skor berhasil disimpan!', 'success'); }
+  if (error) showToast('✗ Gagal menyimpan!', 'error');
+  else showToast('✓ Skor berhasil disimpan!', 'success');
 }
 
 async function loadScores() {
@@ -947,11 +1106,13 @@ async function loadScores() {
     const key = inp.dataset.match ? `${inp.dataset.match}-${inp.dataset.side || idx}` : `inp-${idx}`;
     if (map[key] !== undefined && map[key] !== '') {
       inp.value = map[key]; inp.classList.add('filled');
-      const tmp = isAdmin; isAdmin = true;
+      // Trigger visual update (sementara enable untuk rendering)
+      const wasDisabled = inp.disabled;
+      inp.disabled = false;
       if (inp.dataset.match && inp.closest('.match-card')) updateScore(inp);
       else if (inp.dataset.match && inp.closest('.mlbb-match')) updateScoreML(inp);
       else markFilled(inp);
-      isAdmin = tmp;
+      inp.disabled = wasDisabled;
     }
   });
 }
@@ -978,15 +1139,16 @@ function renderJadwalGallery(images) {
     if (manage) manage.style.display = 'none'; return;
   }
   empty.style.display = 'none'; gallery.style.display = 'flex';
-  if (manage) manage.style.display = isAdmin ? 'block' : 'none';
+  if (manage) manage.style.display = (isAdmin && currentUserData && currentUserData.allowedTabs === null) ? 'block' : 'none';
   images.forEach(img => {
     const tanggal = img.uploaded_at ? new Date(img.uploaded_at).toLocaleDateString('id-ID', {day:'numeric',month:'long',year:'numeric'}) : '';
     const wrap = document.createElement('div');
     wrap.style.cssText = 'background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;';
+    const canDelete = isAdmin && currentUserData && (currentUserData.allowedTabs === null);
     const info = document.createElement('div');
     info.style.cssText = 'padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);gap:8px;';
     info.innerHTML = `<span style="font-size:11px;color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">📸 ${img.name || 'Jadwal'} · ${tanggal}</span>`
-      + (isAdmin ? `<button onclick="deleteJadwalImage(${img.id})" style="background:rgba(239,83,80,0.12);border:1px solid rgba(239,83,80,0.3);color:var(--red);font-size:11px;font-weight:600;padding:5px 10px;border-radius:5px;cursor:pointer;flex-shrink:0;touch-action:manipulation;">Hapus</button>` : '');
+      + (canDelete ? `<button onclick="deleteJadwalImage(${img.id})" style="background:rgba(239,83,80,0.12);border:1px solid rgba(239,83,80,0.3);color:var(--red);font-size:11px;font-weight:600;padding:5px 10px;border-radius:5px;cursor:pointer;flex-shrink:0;touch-action:manipulation;">Hapus</button>` : '');
     const image = document.createElement('img');
     image.src = img.data; image.alt = img.name || 'Jadwal';
     image.style.cssText = 'width:100%;display:block;cursor:zoom-in;max-height:80vh;object-fit:contain;background:#071830;';
@@ -996,6 +1158,7 @@ function renderJadwalGallery(images) {
 }
 
 function handleJadwalUpload(input) {
+  if (!isAdmin || !currentUserData || !currentUserData.canUploadJadwal) return;
   const files = Array.from(input.files);
   if (!files.length) return;
   const status = document.getElementById('jadwal-upload-status');
@@ -1047,6 +1210,7 @@ function openLightbox(src, name) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Clock
   const HARI = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
   const BULAN = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
   function updateClock() {
@@ -1056,28 +1220,36 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   updateClock(); setInterval(updateClock, 1000);
 
-  setInputsLocked(true);
+  // Default: semua input terkunci (mode viewer)
+  document.querySelectorAll('input[type="number"]').forEach(inp => {
+    inp.disabled = true;
+    inp.classList.add('score-locked');
+  });
+
   loadScores();
   loadJadwalImages();
   switchTab('badminton');
 
+  // Restore session
   try {
-    const savedUser = sessionStorage.getItem('tournament_admin');
-    if (savedUser && ADMINS[savedUser]) {
-      isAdmin = true; currentUser = savedUser;
+    const savedUser = sessionStorage.getItem('tournament_user');
+    if (savedUser && USERS[savedUser]) {
+      isAdmin = true;
+      currentUser = savedUser;
+      currentUserData = USERS[savedUser];
       document.getElementById('admin-bar').classList.add('show');
-      const roleLabel = savedUser === 'admin' ? 'ADMIN' : 'PANITIA';
-      const roleColor = savedUser === 'admin' ? 'var(--gold)' : 'var(--cyan)';
       document.getElementById('admin-username-display').innerHTML =
-        `— <span style="color:${roleColor};font-weight:800;">${roleLabel}</span> <span style="color:var(--muted);font-weight:400;">(${savedUser})</span>`;
-      document.getElementById('save-bar').classList.remove('hidden');
+        `— <span style="color:${currentUserData.color};font-weight:800;">${currentUserData.label}</span> <span style="color:var(--muted);font-weight:400;">(${savedUser})</span>`;
+      document.getElementById('admin-caps-display').innerHTML =
+        `<span>${currentUserData.capsLabel}</span>`;
       document.getElementById('lock-notice').classList.add('hidden');
-      setInputsLocked(false);
-      const uploadBox = document.getElementById('jadwal-upload-box');
-      if (uploadBox) uploadBox.style.display = 'block';
+      applyAccessUI();
+      const firstTab = currentUserData.allowedTabs ? currentUserData.allowedTabs[0] : 'badminton';
+      switchTab(firstTab);
     }
   } catch(e){}
 
+  // Drag & drop jadwal
   const dz = document.getElementById('jadwal-dropzone');
   if (dz) {
     dz.addEventListener('dragover', e => { e.preventDefault(); dz.style.borderColor = 'var(--gold)'; });
