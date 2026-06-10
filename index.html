@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Turnamen HUT RSUD Sungai Lilin Ke-18</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -14,21 +14,23 @@
   }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh;
     background-image: radial-gradient(ellipse at 20% 20%, rgba(79,195,247,0.04) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 80%, rgba(245,166,35,0.04) 0%, transparent 60%); }
+      radial-gradient(ellipse at 80% 80%, rgba(245,166,35,0.04) 0%, transparent 60%);
+    -webkit-text-size-adjust: 100%;
+  }
 
   /* ── LOGIN OVERLAY ── */
   #login-overlay {
     position: fixed; inset: 0; background: rgba(6,14,31,0.97);
     display: flex; align-items: center; justify-content: center;
-    z-index: 9999; backdrop-filter: blur(6px);
+    z-index: 9999; backdrop-filter: blur(6px); padding: 16px;
   }
   #login-overlay.hidden { display: none; }
   .login-box {
     background: var(--card); border: 1px solid var(--border); border-radius: 16px;
-    padding: 36px 32px; width: 100%; max-width: 360px;
+    padding: 28px 20px; width: 100%; max-width: 360px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.6);
   }
-  .login-logo { text-align: center; margin-bottom: 24px; }
+  .login-logo { text-align: center; margin-bottom: 20px; }
   .login-logo .badge {
     display: inline-block; background: linear-gradient(135deg, var(--gold), #e8930f);
     color: #000; font-family: 'Bebas Neue', cursive; font-size: 12px;
@@ -41,48 +43,50 @@
     text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
   .login-field input {
     width: 100%; background: #071830; border: 1.5px solid var(--border); border-radius: 8px;
-    color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; padding: 11px 14px; outline: none;
-    transition: border-color 0.2s;
+    color: var(--text); font-family: 'Inter', sans-serif; font-size: 16px; padding: 13px 14px; outline: none;
+    transition: border-color 0.2s; -webkit-appearance: none;
   }
   .login-field input:focus { border-color: var(--gold); }
   .login-btn {
     width: 100%; background: linear-gradient(135deg, var(--gold), #e8930f); color: #000;
-    font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 800; letter-spacing: 1px;
-    text-transform: uppercase; border: none; border-radius: 8px; padding: 13px;
-    cursor: pointer; margin-top: 6px; transition: all 0.2s;
+    font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 800; letter-spacing: 1px;
+    text-transform: uppercase; border: none; border-radius: 8px; padding: 15px;
+    cursor: pointer; margin-top: 6px; transition: all 0.2s; -webkit-appearance: none;
+    touch-action: manipulation;
   }
-  .login-btn:hover { box-shadow: 0 4px 20px rgba(245,166,35,0.4); }
+  .login-btn:active { opacity: 0.85; }
   .login-error { color: var(--red); font-size: 12px; text-align: center; margin-top: 10px; min-height: 18px; }
   .login-view-btn {
     width: 100%; background: transparent; border: 1px solid var(--border); color: var(--muted);
-    font-size: 13px; font-weight: 600; border-radius: 8px; padding: 10px; cursor: pointer;
-    margin-top: 8px; transition: all 0.2s;
+    font-size: 13px; font-weight: 600; border-radius: 8px; padding: 12px; cursor: pointer;
+    margin-top: 8px; transition: all 0.2s; touch-action: manipulation;
   }
-  .login-view-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .login-view-btn:active { border-color: var(--cyan); color: var(--cyan); }
 
   /* ── ADMIN BAR ── */
   #admin-bar {
     background: linear-gradient(90deg, #071428, #0d2145, #071428);
     border-bottom: 1px solid rgba(245,166,35,0.3);
-    padding: 8px 20px; display: none; align-items: center; justify-content: space-between;
-    gap: 10px; flex-wrap: wrap;
+    padding: 8px 14px; display: none; align-items: center; justify-content: space-between;
+    gap: 8px; flex-wrap: wrap;
   }
   #admin-bar.show { display: flex; }
-  .admin-info { display: flex; align-items: center; gap: 8px; font-size: 12px; }
-  .admin-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+  .admin-info { display: flex; align-items: center; gap: 6px; font-size: 11px; }
+  .admin-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
   .admin-label { color: var(--gold); font-weight: 700; letter-spacing: 1px; }
   .admin-user { color: var(--muted); }
+  .admin-caps { display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--muted); }
   .logout-btn {
     background: rgba(239,83,80,0.12); border: 1px solid rgba(239,83,80,0.3);
-    color: var(--red); font-size: 12px; font-weight: 600; padding: 5px 14px;
-    border-radius: 6px; cursor: pointer; transition: all 0.2s;
+    color: var(--red); font-size: 12px; font-weight: 600; padding: 6px 14px;
+    border-radius: 6px; cursor: pointer; transition: all 0.2s; touch-action: manipulation;
+    white-space: nowrap;
   }
-  .logout-btn:hover { background: rgba(239,83,80,0.2); }
 
   /* ── HEADER ── */
   header {
     background: linear-gradient(135deg, #071428 0%, #0d2145 50%, #071428 100%);
-    border-bottom: 2px solid var(--gold); padding: 28px 20px 22px;
+    border-bottom: 2px solid var(--gold); padding: 20px 16px 16px;
     text-align: center; position: relative; overflow: hidden;
   }
   header::before {
@@ -92,229 +96,290 @@
   }
   .header-badge {
     display: inline-block; background: linear-gradient(135deg, var(--gold), #e8930f);
-    color: #000; font-family: 'Bebas Neue', cursive; font-size: 13px;
-    letter-spacing: 2px; padding: 4px 14px; border-radius: 20px; margin-bottom: 10px;
+    color: #000; font-family: 'Bebas Neue', cursive; font-size: 12px;
+    letter-spacing: 2px; padding: 3px 12px; border-radius: 20px; margin-bottom: 8px;
   }
-  header h1 { font-family: 'Bebas Neue', cursive; font-size: clamp(28px,6vw,52px);
-    letter-spacing: 3px; color: #fff; line-height: 1; margin-bottom: 4px; }
-  header h2 { font-family: 'Bebas Neue', cursive; font-size: clamp(18px,4vw,30px);
-    color: var(--gold); letter-spacing: 2px; margin-bottom: 10px; }
-  .header-meta { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 8px; }
-  .header-meta span { display: flex; align-items: center; gap: 6px; font-size: 13px;
-    color: var(--cyan); font-weight: 500; letter-spacing: 0.5px; }
+  header h1 { font-family: 'Bebas Neue', cursive; font-size: clamp(24px,7vw,52px);
+    letter-spacing: 2px; color: #fff; line-height: 1; margin-bottom: 3px; }
+  header h2 { font-family: 'Bebas Neue', cursive; font-size: clamp(14px,4.5vw,30px);
+    color: var(--gold); letter-spacing: 1.5px; margin-bottom: 8px; line-height: 1.2; }
+  .header-meta { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 6px; }
+  .header-meta span { display: flex; align-items: center; gap: 5px; font-size: 12px;
+    color: var(--cyan); font-weight: 500; }
 
-  /* ── NAV: main tabs + dropdown ── */
+  /* ── NAV ── */
   .nav-wrapper {
     background: #07122a; border-bottom: 1px solid var(--border);
-    position: sticky; top: 0; z-index: 100;
+    position: sticky; top: 0; z-index: 100; overflow: hidden;
   }
-  .main-tabs { display: flex; min-width: max-content; padding: 0 16px; overflow-x: auto; }
-  .nav-item { position: relative; }
+  .main-tabs {
+    display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; scroll-behavior: smooth;
+    padding: 0 8px;
+  }
+  .main-tabs::-webkit-scrollbar { display: none; }
   .tab-btn {
     background: none; border: none; color: var(--muted); font-family: 'Inter', sans-serif;
-    font-size: 12px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase;
-    padding: 14px 18px 12px; cursor: pointer; border-bottom: 3px solid transparent;
-    transition: all 0.2s; white-space: nowrap; display: flex; align-items: center; gap: 7px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
+    padding: 13px 13px 11px; cursor: pointer; border-bottom: 3px solid transparent;
+    transition: all 0.2s; white-space: nowrap; display: flex; align-items: center; gap: 5px;
+    flex-shrink: 0; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
   }
-  .tab-btn .caret { font-size: 9px; opacity: 0.6; transition: transform 0.2s; }
-  .tab-btn:hover { color: var(--text); }
+  .tab-btn:active { color: var(--text); }
   .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
-  .tab-btn.parent-active { color: var(--gold); border-bottom-color: var(--gold); }
-
-  /* dropdown */
-  .dropdown {
-    position: absolute; top: 100%; left: 0; background: #07122a;
-    border: 1px solid var(--border); border-top: none; border-radius: 0 0 8px 8px;
-    min-width: 180px; display: none; z-index: 200;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-  }
-  .dropdown.open { display: block; }
-  .dropdown-btn {
-    display: block; width: 100%; background: none; border: none;
-    color: var(--muted); font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
-    letter-spacing: 0.5px; text-transform: uppercase; padding: 12px 18px;
-    cursor: pointer; text-align: left; transition: all 0.15s; white-space: nowrap;
-  }
-  .dropdown-btn:hover { background: rgba(26,58,107,0.5); color: var(--text); }
-  .dropdown-btn.active { color: var(--gold); background: rgba(245,166,35,0.06); }
 
   /* ── CONTENT ── */
-  .content { max-width: 1000px; margin: 0 auto; padding: 28px 16px 80px; }
+  .content { max-width: 700px; margin: 0 auto; padding: 16px 12px 100px; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  /* ── SUB-TABS (Putra / Putri) ── */
+  /* ── SUB-TABS ── */
   .sub-tabs {
-    display: flex; gap: 6px; margin-bottom: 20px;
-    border-bottom: 1px solid var(--border); padding-bottom: 0;
+    display: flex; gap: 4px; margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  .sub-tabs::-webkit-scrollbar { display: none; }
   .sub-btn {
     background: none; border: none; border-bottom: 3px solid transparent;
     color: var(--muted); font-family: 'Inter', sans-serif; font-size: 12px;
-    font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
-    padding: 8px 16px 10px; cursor: pointer; transition: all 0.2s;
-    margin-bottom: -1px;
+    font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+    padding: 9px 14px 11px; cursor: pointer; transition: all 0.2s;
+    margin-bottom: -1px; white-space: nowrap; flex-shrink: 0;
+    touch-action: manipulation; -webkit-tap-highlight-color: transparent;
   }
-  .sub-btn:hover { color: var(--text); }
   .sub-btn.active { color: var(--cyan); border-bottom-color: var(--cyan); }
   .sub-panel { display: none; }
   .sub-panel.active { display: block; }
 
-  /* ── LOCKED OVERLAY on inputs ── */
-  .score-locked { pointer-events: none; opacity: 0.5; }
+  .score-locked { pointer-events: none; opacity: 0.45; }
 
   /* ── SECTION TITLE ── */
-  .section-title { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-  .section-title h3 { font-family: 'Bebas Neue', cursive; font-size: 22px; letter-spacing: 2px; color: #fff; }
+  .section-title { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .section-title h3 { font-family: 'Bebas Neue', cursive; font-size: 20px; letter-spacing: 2px; color: #fff; }
   .section-title .pill {
-    background: var(--border); color: var(--cyan); font-size: 11px; font-weight: 700;
-    letter-spacing: 1px; padding: 3px 10px; border-radius: 20px; text-transform: uppercase;
+    background: var(--border); color: var(--cyan); font-size: 10px; font-weight: 700;
+    letter-spacing: 1px; padding: 3px 9px; border-radius: 20px; text-transform: uppercase;
   }
 
   /* ── MATCH CARD ── */
-  .matches-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+  .matches-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
   .match-card {
     background: var(--card); border: 1px solid var(--border); border-radius: 10px;
-    padding: 14px 18px; transition: border-color 0.2s; position: relative;
+    padding: 12px 14px; transition: border-color 0.2s; position: relative;
   }
-  .match-card:hover { border-color: #2a5a9b; }
   .match-card.has-score { border-color: rgba(245,166,35,0.3); }
   .match-card.has-winner { border-left: 3px solid var(--gold); }
-  .match-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .match-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
   .partai-badge {
     background: linear-gradient(135deg, var(--gold), #e8930f); color: #000;
-    font-size: 10px; font-weight: 800; letter-spacing: 1px; padding: 3px 9px;
+    font-size: 10px; font-weight: 800; letter-spacing: 1px; padding: 3px 8px;
     border-radius: 4px; text-transform: uppercase; white-space: nowrap;
   }
-  .match-status { margin-left: auto; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; padding: 3px 10px; border-radius: 20px; }
+  .match-status { margin-left: auto; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
   .status-pending { background: rgba(121,134,168,0.15); color: var(--muted); }
   .status-playing { background: rgba(76,175,80,0.15); color: var(--green); }
   .status-done { background: rgba(245,166,35,0.15); color: var(--gold); }
-  .match-body { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; }
-  .team { display: flex; flex-direction: column; gap: 3px; }
+
+  /* Mobile-first match body: stack vertically on small screens */
+  .match-body {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center; gap: 8px;
+  }
+  .team { display: flex; flex-direction: column; gap: 2px; }
   .team.right { text-align: right; align-items: flex-end; }
-  .team-name { font-size: 14px; font-weight: 700; color: #fff; line-height: 1.3; }
+  .team-name { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.3; }
   .team-name.winner { color: var(--gold2); }
-  .vs-score { display: flex; align-items: center; gap: 8px; justify-content: center; }
+  .vs-score { display: flex; align-items: center; gap: 6px; justify-content: center; flex-direction: column; }
   .score-input {
-    width: 48px; height: 48px; background: #071830; border: 2px solid var(--border);
-    border-radius: 8px; color: var(--gold); font-family: 'Bebas Neue', cursive; font-size: 26px;
+    width: 52px; height: 52px; background: #071830; border: 2px solid var(--border);
+    border-radius: 8px; color: var(--gold); font-family: 'Bebas Neue', cursive; font-size: 28px;
     text-align: center; outline: none; transition: all 0.2s; -moz-appearance: textfield;
+    -webkit-appearance: none; touch-action: manipulation;
+    /* Larger tap target */
   }
   .score-input::-webkit-outer-spin-button, .score-input::-webkit-inner-spin-button { -webkit-appearance: none; }
-  .score-input:focus { border-color: var(--gold); background: #0d2040; box-shadow: 0 0 0 3px rgba(245,166,35,0.12); }
+  .score-input:focus { border-color: var(--gold); background: #0d2040; }
   .score-input.filled { border-color: rgba(245,166,35,0.5); background: #0d2040; }
   .score-input.winner-score { border-color: var(--gold); background: rgba(245,166,35,0.08); }
-  .vs-label { font-family: 'Bebas Neue', cursive; font-size: 18px; color: var(--muted); letter-spacing: 2px; }
+  .vs-label { font-family: 'Bebas Neue', cursive; font-size: 14px; color: var(--muted); letter-spacing: 2px; }
 
   /* ── ROUND ROBIN ── */
-  .rr-group { margin-bottom: 32px; }
+  .rr-group { margin-bottom: 24px; }
   .rr-group-title {
-    font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-    color: var(--cyan); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--cyan); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
   }
   .rr-group-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
   .rr-rounds { display: flex; flex-direction: column; gap: 8px; }
+
+  /* RR match: stack pada mobile */
   .rr-match {
     background: var(--card); border: 1px solid var(--border); border-radius: 8px;
-    padding: 12px 16px; display: grid; grid-template-columns: 60px 1fr auto 1fr;
-    align-items: center; gap: 10px; transition: border-color 0.2s;
+    padding: 10px 12px;
+    display: grid;
+    grid-template-columns: 52px 1fr auto 1fr;
+    align-items: center; gap: 8px; transition: border-color 0.2s;
   }
-  .rr-match:hover { border-color: #2a5a9b; }
   .rr-match.has-winner { border-left: 3px solid var(--gold); }
   .round-label {
-    font-size: 10px; font-weight: 700; letter-spacing: 1px; color: var(--muted);
-    text-transform: uppercase; background: rgba(26,58,107,0.5); padding: 3px 7px;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.8px; color: var(--muted);
+    text-transform: uppercase; background: rgba(26,58,107,0.5); padding: 3px 5px;
     border-radius: 4px; text-align: center; white-space: nowrap;
   }
-  .rr-team { font-size: 13px; font-weight: 600; color: #fff; }
+  .rr-team { font-size: 12px; font-weight: 600; color: #fff; line-height: 1.3; }
   .rr-team.right { text-align: right; }
   .rr-team.winner { color: var(--gold2); }
-  .rr-score { display: flex; align-items: center; gap: 6px; justify-content: center; }
+  .rr-score { display: flex; align-items: center; gap: 5px; justify-content: center; }
   .score-sm {
-    width: 40px; height: 38px; background: #071830; border: 1.5px solid var(--border);
-    border-radius: 6px; color: var(--gold); font-family: 'Bebas Neue', cursive; font-size: 22px;
+    width: 44px; height: 44px; background: #071830; border: 1.5px solid var(--border);
+    border-radius: 6px; color: var(--gold); font-family: 'Bebas Neue', cursive; font-size: 24px;
     text-align: center; outline: none; transition: all 0.2s; -moz-appearance: textfield;
+    -webkit-appearance: none; touch-action: manipulation;
   }
   .score-sm::-webkit-outer-spin-button, .score-sm::-webkit-inner-spin-button { -webkit-appearance: none; }
-  .score-sm:focus { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(245,166,35,0.12); }
+  .score-sm:focus { border-color: var(--gold); }
   .score-sm.filled { border-color: rgba(245,166,35,0.4); }
   .score-sm.winner-score { border-color: var(--gold); background: rgba(245,166,35,0.08); }
-  .dash { font-size: 16px; color: var(--muted); font-weight: 700; }
+  .dash { font-size: 14px; color: var(--muted); font-weight: 700; }
 
   /* ── MLBB ── */
   .mlbb-grid { display: flex; flex-direction: column; gap: 10px; }
   .mlbb-match {
     background: var(--card); border: 1px solid var(--border); border-radius: 10px;
-    padding: 14px 18px; display: grid; grid-template-columns: 80px 1fr auto 1fr;
-    align-items: center; gap: 12px; transition: border-color 0.2s;
+    padding: 12px 14px; transition: border-color 0.2s;
   }
-  .mlbb-match:hover { border-color: #2a5a9b; }
   .mlbb-match.has-winner { border-left: 3px solid var(--gold); }
+
+  /* MLBB: time on top, then teams + score */
+  .mlbb-inner {
+    display: grid;
+    grid-template-columns: 64px 1fr auto 1fr;
+    align-items: center; gap: 10px;
+  }
   .time-badge {
     background: rgba(26,58,107,0.7); border: 1px solid var(--border);
-    border-radius: 6px; text-align: center; padding: 6px 4px;
+    border-radius: 6px; text-align: center; padding: 6px 4px; flex-shrink: 0;
   }
-  .time-badge .time { font-family: 'Bebas Neue', cursive; font-size: 20px; color: var(--cyan); }
+  .time-badge .time { font-family: 'Bebas Neue', cursive; font-size: 18px; color: var(--cyan); line-height: 1; }
   .time-badge .wib { font-size: 9px; color: var(--muted); letter-spacing: 1px; }
-  .mlbb-team { font-size: 13px; font-weight: 600; color: #fff; }
-  .mlbb-team .team-num { display: block; font-size: 11px; color: var(--muted); font-weight: 700; margin-bottom: 2px; letter-spacing: 1px; }
+  .mlbb-team { font-size: 12px; font-weight: 600; color: #fff; line-height: 1.5; }
+  .mlbb-team .team-num { display: block; font-size: 10px; color: var(--muted); font-weight: 700; margin-bottom: 2px; letter-spacing: 1px; }
 
   /* ── BRACKET INFO ── */
-  .bracket-info { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 24px; }
+  .bracket-info { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 20px; }
   .bracket-info p { font-size: 13px; color: var(--muted); line-height: 1.6; }
   .bracket-info strong { color: var(--cyan); }
 
   /* ── SAVE BAR ── */
   .save-bar {
     position: fixed; bottom: 0; left: 0; right: 0;
-    background: linear-gradient(to top, #060e1f 60%, transparent);
-    padding: 20px; display: flex; justify-content: center; z-index: 200; pointer-events: none;
+    background: linear-gradient(to top, #060e1f 70%, transparent);
+    padding: 16px 16px 20px; display: flex; justify-content: center; z-index: 200; pointer-events: none;
   }
   .save-bar.hidden { display: none; }
   .save-btn {
     pointer-events: all;
     background: linear-gradient(135deg, var(--gold), #e8930f); color: #000;
     font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 800; letter-spacing: 1px;
-    text-transform: uppercase; border: none; border-radius: 8px; padding: 13px 36px;
-    cursor: pointer; box-shadow: 0 4px 24px rgba(245,166,35,0.35); transition: all 0.2s;
-    display: flex; align-items: center; gap: 8px;
+    text-transform: uppercase; border: none; border-radius: 10px; padding: 15px 40px;
+    cursor: pointer; box-shadow: 0 4px 24px rgba(245,166,35,0.4); transition: all 0.2s;
+    display: flex; align-items: center; gap: 8px; touch-action: manipulation;
+    width: 100%; max-width: 320px; justify-content: center;
   }
-  .save-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(245,166,35,0.45); }
+  .save-btn:active { transform: scale(0.97); }
 
   /* viewer lock notice */
   .lock-notice {
     position: fixed; bottom: 0; left: 0; right: 0;
-    padding: 14px 20px; display: flex; justify-content: center; z-index: 200; pointer-events: none;
+    padding: 12px 16px 16px; display: flex; justify-content: center; z-index: 200; pointer-events: none;
   }
   .lock-notice .inner {
-    background: rgba(6,14,31,0.9); border: 1px solid var(--border); border-radius: 8px;
-    padding: 10px 20px; font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 8px;
-    pointer-events: all;
+    background: rgba(6,14,31,0.95); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 16px; font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 10px;
+    pointer-events: all; width: 100%; max-width: 380px; justify-content: center;
   }
   .lock-notice .inner button {
     background: none; border: 1px solid var(--gold); color: var(--gold);
-    font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 6px; cursor: pointer;
+    font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 6px; cursor: pointer;
+    white-space: nowrap; touch-action: manipulation;
   }
   .lock-notice.hidden { display: none; }
 
   /* ── TOAST ── */
   .toast {
-    position: fixed; top: 20px; right: 20px; color: #fff; font-weight: 700; font-size: 13px;
+    position: fixed; top: 16px; left: 50%; transform: translateX(-50%) translateY(-10px);
+    color: #fff; font-weight: 700; font-size: 13px;
     padding: 12px 20px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    z-index: 9998; opacity: 0; transform: translateY(-10px); transition: all 0.3s; pointer-events: none;
+    z-index: 9998; opacity: 0; transition: all 0.3s; pointer-events: none;
+    white-space: nowrap; max-width: 90vw; text-align: center;
   }
   .toast.success { background: var(--green); }
   .toast.error { background: var(--red); }
-  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  @media (max-width: 600px) {
-    .match-body { gap: 8px; }
-    .team-name { font-size: 12px; }
-    .score-input { width: 42px; height: 42px; font-size: 22px; }
-    .mlbb-match { grid-template-columns: 60px 1fr auto 1fr; }
-    .rr-match { grid-template-columns: 50px 1fr auto 1fr; gap: 6px; }
-    .rr-team { font-size: 11px; }
+  /* ── EMPTY STATE ── */
+  .empty-state { text-align: center; padding: 40px 20px; }
+  .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
+  .empty-state p { color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+  /* ── JADWAL UPLOAD ── */
+  #jadwal-dropzone {
+    border: 2px dashed var(--border); border-radius: 10px; padding: 28px 16px;
+    text-align: center; cursor: pointer; transition: all 0.2s; background: rgba(7,24,48,0.5);
+    touch-action: manipulation;
+  }
+
+  /* ════════════════════════════════
+     RESPONSIVE BREAKPOINTS
+     ════════════════════════════════ */
+
+  /* Small phones (≤ 400px) */
+  @media (max-width: 400px) {
+    header h1 { font-size: 22px; }
+    header h2 { font-size: 13px; }
+
+    .match-body { gap: 6px; }
+    .team-name { font-size: 11px; }
+    .score-input { width: 46px; height: 46px; font-size: 24px; }
+
+    .rr-match { grid-template-columns: 44px 1fr auto 1fr; gap: 5px; }
+    .rr-team { font-size: 10px; }
+    .score-sm { width: 38px; height: 38px; font-size: 20px; }
+    .round-label { font-size: 8px; padding: 2px 4px; }
+
+    .mlbb-inner { grid-template-columns: 54px 1fr auto 1fr; gap: 7px; }
+    .mlbb-team { font-size: 10px; }
+    .time-badge .time { font-size: 15px; }
+  }
+
+  /* Medium phones (401–600px) */
+  @media (min-width: 401px) and (max-width: 600px) {
+    .score-input { width: 50px; height: 50px; }
+    .mlbb-inner { grid-template-columns: 60px 1fr auto 1fr; }
+  }
+
+  /* Tablet and up (≥ 601px) — restore more spacious layout */
+  @media (min-width: 601px) {
+    .content { padding: 24px 20px 100px; }
+    header { padding: 28px 20px 22px; }
+    .tab-btn { font-size: 12px; padding: 14px 18px 12px; }
+    .team-name { font-size: 14px; }
+    .score-input { width: 52px; height: 52px; font-size: 28px; }
+    .rr-match { grid-template-columns: 60px 1fr auto 1fr; gap: 10px; }
+    .rr-team { font-size: 13px; }
+    .score-sm { width: 44px; height: 44px; font-size: 24px; }
+    .mlbb-inner { grid-template-columns: 80px 1fr auto 1fr; gap: 12px; }
+    .mlbb-team { font-size: 13px; }
+    .match-card { padding: 14px 18px; }
+  }
+
+  /* Very long team names: ensure no overflow */
+  .rr-team, .mlbb-team, .team-name {
+    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 </style>
 </head>
@@ -327,7 +392,7 @@
       <div class="badge">HUT KE-18</div>
       <h2>Login</h2>
       <p>Masuk sebagai Admin atau Panitia</p>
-      <div style="margin-top:10px;background:rgba(26,58,107,0.5);border:1px solid var(--border);border-radius:8px;padding:10px 14px;text-align:left;">
+      <div style="margin-top:10px;background:rgba(26,58,107,0.5);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:left;">
         <div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:1px;margin-bottom:6px;">✅ HAK AKSES SETELAH LOGIN:</div>
         <div style="font-size:11px;color:var(--muted);line-height:1.8;">
           🔢 Update &amp; simpan skor pertandingan<br>
@@ -338,7 +403,7 @@
     </div>
     <div class="login-field">
       <label>Username</label>
-      <input type="text" id="login-user" placeholder="Masukkan username" autocomplete="username">
+      <input type="text" id="login-user" placeholder="Masukkan username" autocomplete="username" inputmode="text">
     </div>
     <div class="login-field">
       <label>Password</label>
@@ -358,10 +423,8 @@
     <span class="admin-label">MODE</span>
     <span class="admin-user" id="admin-username-display"></span>
   </div>
-  <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);">
-    <span>✅ Update Skor</span>
-    <span>·</span>
-    <span>📁 Upload Jadwal</span>
+  <div class="admin-caps">
+    <span>✅ Skor</span><span>·</span><span>📁 Jadwal</span>
   </div>
   <button class="logout-btn" onclick="doLogout()">Keluar</button>
 </div>
@@ -373,11 +436,11 @@
   <h2>Turnamen HUT RSUD Sungai Lilin Ke-18</h2>
   <div class="header-meta">
     <span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       <span id="live-date">—</span>
     </span>
     <span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       <span id="live-time">—</span> WIB
     </span>
   </div>
@@ -385,14 +448,14 @@
 
 <!-- ═══════════════ NAV ═══════════════ -->
 <div class="nav-wrapper">
-  <div class="main-tabs">
+  <div class="main-tabs" id="main-tabs">
     <button class="tab-btn" id="btn-badminton" onclick="switchTab('badminton')">🏸 Badminton</button>
     <button class="tab-btn" id="btn-pimpong"   onclick="switchTab('pimpong')">🏓 Pimpong</button>
     <button class="tab-btn" id="btn-nasigoreng"  onclick="switchTab('nasigoreng')">🍳 Nasi Goreng</button>
     <button class="tab-btn" id="btn-gaple"        onclick="switchTab('gaple')">🀱 Gaple</button>
-    <button class="tab-btn" id="btn-playstation"  onclick="switchTab('playstation')">🕹️ PlayStation</button>
-    <button class="tab-btn" id="btn-mars"         onclick="switchTab('mars')">🎵 MARS RSUD</button>
-    <button class="tab-btn" id="btn-videoedukasi" onclick="switchTab('videoedukasi')">🎬 Video Edukasi</button>
+    <button class="tab-btn" id="btn-playstation"  onclick="switchTab('playstation')">🕹️ PS</button>
+    <button class="tab-btn" id="btn-mars"         onclick="switchTab('mars')">🎵 MARS</button>
+    <button class="tab-btn" id="btn-videoedukasi" onclick="switchTab('videoedukasi')">🎬 Video</button>
     <button class="tab-btn" id="btn-mlbb"      onclick="switchTab('mlbb')">🎮 MLBB</button>
     <button class="tab-btn" id="btn-jadwal"    onclick="switchTab('jadwal')">📋 Jadwal</button>
   </div>
@@ -403,49 +466,61 @@
 
   <!-- ══ BADMINTON ══ -->
   <div class="tab-panel" id="panel-badminton">
-    <div class="section-title">
-      <h3>🏸 Badminton</h3>
-    </div>
-    <!-- Sub-tab Putra/Putri -->
+    <div class="section-title"><h3>🏸 Badminton</h3></div>
     <div class="sub-tabs">
       <button class="sub-btn active" id="sbtn-ganda-putra" onclick="switchSub('ganda-putra','badminton')">Ganda Putra</button>
       <button class="sub-btn" id="sbtn-ganda-putri" onclick="switchSub('ganda-putri','badminton')">Ganda Putri</button>
     </div>
 
-    <!-- Sub-panel Putra -->
     <div class="sub-panel active" id="sub-ganda-putra">
-      <div class="rr-group-title" style="margin-top:4px">Pertandingan Hari Ini — Pukul 15:00 WIB</div>
+      <div class="rr-group-title" style="margin-top:4px">Pertandingan — Pukul 15:00 WIB</div>
       <div class="matches-grid">
         <div class="match-card" data-id="gp-t1">
           <div class="match-header"><span class="partai-badge">Partai 1</span><span class="match-status status-pending">Menunggu</span></div>
           <div class="match-body">
-            <div class="team left"><div class="team-name">Jefri Agung &amp;<br>Eko Yulianto</div></div>
-            <div class="vs-score"><input type="number" class="score-input" min="0" data-match="gp-t1" data-side="left" placeholder="0" oninput="updateScore(this)"><span class="vs-label">VS</span><input type="number" class="score-input" min="0" data-match="gp-t1" data-side="right" placeholder="0" oninput="updateScore(this)"></div>
-            <div class="team right"><div class="team-name">Zulkarnain &amp;<br>I Gusti Agus S</div></div>
+            <div class="team left"><div class="team-name">Jefri Agung &amp; Eko Yulianto</div></div>
+            <div class="vs-score">
+              <input type="number" class="score-input" min="0" data-match="gp-t1" data-side="left" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+              <span class="vs-label">VS</span>
+              <input type="number" class="score-input" min="0" data-match="gp-t1" data-side="right" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+            </div>
+            <div class="team right"><div class="team-name">Zulkarnain &amp; I Gusti Agus S</div></div>
           </div>
         </div>
         <div class="match-card" data-id="gp-t2">
           <div class="match-header"><span class="partai-badge">Partai 2</span><span class="match-status status-pending">Menunggu</span></div>
           <div class="match-body">
-            <div class="team left"><div class="team-name">Akka Rian A.P &amp;<br>Dodi Supermana</div></div>
-            <div class="vs-score"><input type="number" class="score-input" min="0" data-match="gp-t2" data-side="left" placeholder="0" oninput="updateScore(this)"><span class="vs-label">VS</span><input type="number" class="score-input" min="0" data-match="gp-t2" data-side="right" placeholder="0" oninput="updateScore(this)"></div>
-            <div class="team right"><div class="team-name">Endri Kusuma &amp;<br>Maulana</div></div>
+            <div class="team left"><div class="team-name">Akka Rian A.P &amp; Dodi Supermana</div></div>
+            <div class="vs-score">
+              <input type="number" class="score-input" min="0" data-match="gp-t2" data-side="left" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+              <span class="vs-label">VS</span>
+              <input type="number" class="score-input" min="0" data-match="gp-t2" data-side="right" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+            </div>
+            <div class="team right"><div class="team-name">Endri Kusuma &amp; Maulana</div></div>
           </div>
         </div>
         <div class="match-card" data-id="gp-t3">
           <div class="match-header"><span class="partai-badge">Partai 3</span><span class="match-status status-pending">Menunggu</span></div>
           <div class="match-body">
-            <div class="team left"><div class="team-name">Pander &amp;<br>Nanda Febrianto</div></div>
-            <div class="vs-score"><input type="number" class="score-input" min="0" data-match="gp-t3" data-side="left" placeholder="0" oninput="updateScore(this)"><span class="vs-label">VS</span><input type="number" class="score-input" min="0" data-match="gp-t3" data-side="right" placeholder="0" oninput="updateScore(this)"></div>
-            <div class="team right"><div class="team-name">Zabendra &amp;<br>Palma</div></div>
+            <div class="team left"><div class="team-name">Pander &amp; Nanda Febrianto</div></div>
+            <div class="vs-score">
+              <input type="number" class="score-input" min="0" data-match="gp-t3" data-side="left" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+              <span class="vs-label">VS</span>
+              <input type="number" class="score-input" min="0" data-match="gp-t3" data-side="right" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+            </div>
+            <div class="team right"><div class="team-name">Zabendra &amp; Palma</div></div>
           </div>
         </div>
         <div class="match-card" data-id="gp-t4">
           <div class="match-header"><span class="partai-badge">Partai 4</span><span class="match-status status-pending">Menunggu</span></div>
           <div class="match-body">
-            <div class="team left"><div class="team-name">Jhoni J &amp;<br>Rizky</div></div>
-            <div class="vs-score"><input type="number" class="score-input" min="0" data-match="gp-t4" data-side="left" placeholder="0" oninput="updateScore(this)"><span class="vs-label">VS</span><input type="number" class="score-input" min="0" data-match="gp-t4" data-side="right" placeholder="0" oninput="updateScore(this)"></div>
-            <div class="team right"><div class="team-name">Alvin &amp;<br>M. Roby</div></div>
+            <div class="team left"><div class="team-name">Jhoni J &amp; Rizky</div></div>
+            <div class="vs-score">
+              <input type="number" class="score-input" min="0" data-match="gp-t4" data-side="left" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+              <span class="vs-label">VS</span>
+              <input type="number" class="score-input" min="0" data-match="gp-t4" data-side="right" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+            </div>
+            <div class="team right"><div class="team-name">Alvin &amp; M. Roby</div></div>
           </div>
         </div>
       </div>
@@ -453,266 +528,217 @@
       <div class="bracket-info"><p>Format: <strong>Double Elimination</strong>. Total 8 pasangan. Juara ditentukan dari babak final bracket atas &amp; bawah.</p></div>
     </div>
 
-    <!-- Sub-panel Putri -->
     <div class="sub-panel" id="sub-ganda-putri">
-      <div class="rr-group-title" style="margin-top:4px">Pertandingan Hari Ini — Pukul 15:00 WIB</div>
+      <div class="rr-group-title" style="margin-top:4px">Pertandingan — Pukul 15:00 WIB</div>
       <div class="matches-grid">
         <div class="match-card" data-id="pp-t1">
           <div class="match-header"><span class="partai-badge">Partai 1</span><span class="match-status status-pending">Menunggu</span></div>
           <div class="match-body">
-            <div class="team left"><div class="team-name">Anisa Fatimah &amp;<br>Dena Meylinda</div></div>
-            <div class="vs-score"><input type="number" class="score-input" min="0" data-match="pp-t1" data-side="left" placeholder="0" oninput="updateScore(this)"><span class="vs-label">VS</span><input type="number" class="score-input" min="0" data-match="pp-t1" data-side="right" placeholder="0" oninput="updateScore(this)"></div>
-            <div class="team right"><div class="team-name">Dewi Sutarti &amp;<br>Shally Fathia</div></div>
+            <div class="team left"><div class="team-name">Anisa Fatimah &amp; Dena Meylinda</div></div>
+            <div class="vs-score">
+              <input type="number" class="score-input" min="0" data-match="pp-t1" data-side="left" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+              <span class="vs-label">VS</span>
+              <input type="number" class="score-input" min="0" data-match="pp-t1" data-side="right" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+            </div>
+            <div class="team right"><div class="team-name">Dewi Sutarti &amp; Shally Fathia</div></div>
           </div>
         </div>
         <div class="match-card" data-id="pp-t2">
           <div class="match-header"><span class="partai-badge">Partai 2</span><span class="match-status status-pending">Menunggu</span></div>
           <div class="match-body">
-            <div class="team left"><div class="team-name">Andisty &amp;<br>Rika Rahma Nur Aisyah</div></div>
-            <div class="vs-score"><input type="number" class="score-input" min="0" data-match="pp-t2" data-side="left" placeholder="0" oninput="updateScore(this)"><span class="vs-label">VS</span><input type="number" class="score-input" min="0" data-match="pp-t2" data-side="right" placeholder="0" oninput="updateScore(this)"></div>
-            <div class="team right"><div class="team-name">Asmarita Sari &amp;<br>Desi Nopita S.</div></div>
+            <div class="team left"><div class="team-name">Andisty &amp; Rika Rahma Nur Aisyah</div></div>
+            <div class="vs-score">
+              <input type="number" class="score-input" min="0" data-match="pp-t2" data-side="left" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+              <span class="vs-label">VS</span>
+              <input type="number" class="score-input" min="0" data-match="pp-t2" data-side="right" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+            </div>
+            <div class="team right"><div class="team-name">Asmarita Sari &amp; Desi Nopita S.</div></div>
           </div>
         </div>
         <div class="match-card" data-id="pp-t3">
           <div class="match-header"><span class="partai-badge">Partai 3</span><span class="match-status status-pending">Menunggu</span></div>
           <div class="match-body">
-            <div class="team left"><div class="team-name">Mimi &amp;<br>Luluk Suprihatin</div></div>
-            <div class="vs-score"><input type="number" class="score-input" min="0" data-match="pp-t3" data-side="left" placeholder="0" oninput="updateScore(this)"><span class="vs-label">VS</span><input type="number" class="score-input" min="0" data-match="pp-t3" data-side="right" placeholder="0" oninput="updateScore(this)"></div>
-            <div class="team right"><div class="team-name">Eka Merta &amp;<br>Apriza Kaswida</div></div>
+            <div class="team left"><div class="team-name">Mimi &amp; Luluk Suprihatin</div></div>
+            <div class="vs-score">
+              <input type="number" class="score-input" min="0" data-match="pp-t3" data-side="left" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+              <span class="vs-label">VS</span>
+              <input type="number" class="score-input" min="0" data-match="pp-t3" data-side="right" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+            </div>
+            <div class="team right"><div class="team-name">Eka Merta &amp; Apriza Kaswida</div></div>
           </div>
         </div>
         <div class="match-card" data-id="pp-t4">
           <div class="match-header"><span class="partai-badge">Partai 4</span><span class="match-status status-pending">Menunggu</span></div>
           <div class="match-body">
-            <div class="team left"><div class="team-name">Ayu Putri &amp;<br>Leli Agustina</div></div>
-            <div class="vs-score"><input type="number" class="score-input" min="0" data-match="pp-t4" data-side="left" placeholder="0" oninput="updateScore(this)"><span class="vs-label">VS</span><input type="number" class="score-input" min="0" data-match="pp-t4" data-side="right" placeholder="0" oninput="updateScore(this)"></div>
-            <div class="team right"><div class="team-name">Neni Fenisih &amp;<br>Rahma Abella</div></div>
+            <div class="team left"><div class="team-name">Ayu Putri &amp; Leli Agustina</div></div>
+            <div class="vs-score">
+              <input type="number" class="score-input" min="0" data-match="pp-t4" data-side="left" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+              <span class="vs-label">VS</span>
+              <input type="number" class="score-input" min="0" data-match="pp-t4" data-side="right" placeholder="0" oninput="updateScore(this)" inputmode="numeric">
+            </div>
+            <div class="team right"><div class="team-name">Neni Fenisih &amp; Rahma Abella</div></div>
           </div>
         </div>
       </div>
       <div class="rr-group">
         <div class="rr-group-title">Group 1 — Round Robin (5 Ronde)</div>
         <div class="rr-rounds">
-          <div class="rr-match"><span class="round-label">Ronde 1</span><span class="rr-team">Metha, Marlina</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Novi Nazilah, Tuta</span></div>
-          <div class="rr-match"><span class="round-label">Ronde 1</span><span class="rr-team">Nori, Sindi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Arti, Mimi</span></div>
-          <div class="rr-match"><span class="round-label">Ronde 2</span><span class="rr-team">Mayang, Monika</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Novi Nazilah, Tuta</span></div>
-          <div class="rr-match"><span class="round-label">Ronde 2</span><span class="rr-team">Metha, Marlina</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Nori, Sindi</span></div>
-          <div class="rr-match"><span class="round-label">Ronde 3</span><span class="rr-team">Mayang, Monika</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Arti, Mimi</span></div>
-          <div class="rr-match"><span class="round-label">Ronde 3</span><span class="rr-team">Novi Nazilah, Tuta</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Nori, Sindi</span></div>
-          <div class="rr-match"><span class="round-label">Ronde 4</span><span class="rr-team">Mayang, Monika</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Nori, Sindi</span></div>
-          <div class="rr-match"><span class="round-label">Ronde 4</span><span class="rr-team">Arti, Mimi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Metha, Marlina</span></div>
-          <div class="rr-match"><span class="round-label">Ronde 5</span><span class="rr-team">Mayang, Monika</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Metha, Marlina</span></div>
-          <div class="rr-match"><span class="round-label">Ronde 5</span><span class="rr-team">Arti, Mimi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Novi Nazilah, Tuta</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 1</span><span class="rr-team">Metha, Marlina</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Novi Nazilah, Tuta</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 1</span><span class="rr-team">Nori, Sindi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Arti, Mimi</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 2</span><span class="rr-team">Mayang, Monika</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Novi Nazilah, Tuta</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 2</span><span class="rr-team">Metha, Marlina</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Nori, Sindi</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 3</span><span class="rr-team">Mayang, Monika</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Arti, Mimi</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 3</span><span class="rr-team">Novi Nazilah, Tuta</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Nori, Sindi</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 4</span><span class="rr-team">Mayang, Monika</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Nori, Sindi</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 4</span><span class="rr-team">Arti, Mimi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Metha, Marlina</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 5</span><span class="rr-team">Mayang, Monika</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Metha, Marlina</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 5</span><span class="rr-team">Arti, Mimi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Novi Nazilah, Tuta</span></div>
         </div>
       </div>
       <div class="rr-group">
         <div class="rr-group-title">Group 2 — Round Robin (3 Ronde)</div>
         <div class="rr-rounds">
-          <div class="rr-match"><span class="round-label">Ronde 1</span><span class="rr-team">Septi, Siska</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Neni, Riska</span></div>
-          <div class="rr-match"><span class="round-label">Ronde 1</span><span class="rr-team">Asmarita Sari, Devi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Ayu, Shinta</span></div>
-          <div class="rr-match"><span class="round-label">Ronde 2</span><span class="rr-team">Septi, Siska</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Ayu, Shinta</span></div>
-          <div class="rr-match"><span class="round-label">Ronde 2</span><span class="rr-team">Neni, Riska</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Asmarita Sari, Devi</span></div>
-          <div class="rr-match"><span class="round-label">Ronde 3</span><span class="rr-team">Septi, Siska</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Asmarita Sari, Devi</span></div>
-          <div class="rr-match"><span class="round-label">Ronde 3</span><span class="rr-team">Ayu, Shinta</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Neni, Riska</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 1</span><span class="rr-team">Septi, Siska</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Neni, Riska</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 1</span><span class="rr-team">Asmarita, Devi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Ayu, Shinta</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 2</span><span class="rr-team">Septi, Siska</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Ayu, Shinta</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 2</span><span class="rr-team">Neni, Riska</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Asmarita, Devi</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 3</span><span class="rr-team">Septi, Siska</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Asmarita, Devi</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 3</span><span class="rr-team">Ayu, Shinta</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Neni, Riska</span></div>
         </div>
       </div>
     </div>
   </div>
+
   <!-- ══ PIMPONG ══ -->
   <div class="tab-panel" id="panel-pimpong">
-    <div class="section-title">
-      <h3>🏓 Pimpong</h3>
-    </div>
-    <!-- Sub-tab -->
+    <div class="section-title"><h3>🏓 Pimpong</h3></div>
     <div class="sub-tabs">
       <button class="sub-btn active" id="sbtn-pp-putra" onclick="switchSub('pp-putra','pimpong')">Ganda Putra</button>
       <button class="sub-btn" id="sbtn-pp-putri" onclick="switchSub('pp-putri','pimpong')">Ganda Putri</button>
     </div>
-
-    <!-- Sub-panel Putra -->
     <div class="sub-panel active" id="sub-pp-putra">
       <div class="rr-group">
-      <div class="rr-group-title">Group 1 — Round Robin (5 Ronde)</div>
-      <div class="rr-rounds">
-        <div class="rr-match"><span class="round-label">Ronde 1</span><span class="rr-team">Andes, Yunan Fito</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Eko Maryanto, Fajar Sangkur</span></div>
-        <div class="rr-match"><span class="round-label">Ronde 1</span><span class="rr-team">dr. Alan, Tomy</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Alif, Mahmul Hol Fauzi</span></div>
-        <div class="rr-match"><span class="round-label">Ronde 2</span><span class="rr-team">Ijal, Dodi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Eko Maryanto, Fajar Sangkur</span></div>
-        <div class="rr-match"><span class="round-label">Ronde 2</span><span class="rr-team">Andes, Yunan Fito</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">dr. Alan, Tomy</span></div>
-        <div class="rr-match"><span class="round-label">Ronde 3</span><span class="rr-team">Ijal, Dodi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Alif, Mahmul Hol Fauzi</span></div>
-        <div class="rr-match"><span class="round-label">Ronde 3</span><span class="rr-team">Eko Maryanto, Fajar Sangkur</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">dr. Alan, Tomy</span></div>
-        <div class="rr-match"><span class="round-label">Ronde 4</span><span class="rr-team">Ijal, Dodi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">dr. Alan, Tomy</span></div>
-        <div class="rr-match"><span class="round-label">Ronde 4</span><span class="rr-team">Alif, Mahmul Hol Fauzi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Andes, Yunan Fito</span></div>
-        <div class="rr-match"><span class="round-label">Ronde 5</span><span class="rr-team">Ijal, Dodi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Andes, Yunan Fito</span></div>
-        <div class="rr-match"><span class="round-label">Ronde 5</span><span class="rr-team">Alif, Mahmul Hol Fauzi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)"></div><span class="rr-team right">Eko Maryanto, Fajar Sangkur</span></div>
+        <div class="rr-group-title">Group 1 — Round Robin (5 Ronde)</div>
+        <div class="rr-rounds">
+          <div class="rr-match"><span class="round-label">Ronde 1</span><span class="rr-team">Andes, Yunan Fito</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Eko Maryanto, Fajar S</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 1</span><span class="rr-team">dr. Alan, Tomy</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Alif, Mahmul H.F</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 2</span><span class="rr-team">Ijal, Dodi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Eko Maryanto, Fajar S</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 2</span><span class="rr-team">Andes, Yunan Fito</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">dr. Alan, Tomy</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 3</span><span class="rr-team">Ijal, Dodi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Alif, Mahmul H.F</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 3</span><span class="rr-team">Eko M, Fajar S</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">dr. Alan, Tomy</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 4</span><span class="rr-team">Ijal, Dodi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">dr. Alan, Tomy</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 4</span><span class="rr-team">Alif, Mahmul H.F</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Andes, Yunan Fito</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 5</span><span class="rr-team">Ijal, Dodi</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Andes, Yunan Fito</span></div>
+          <div class="rr-match"><span class="round-label">Ronde 5</span><span class="rr-team">Alif, Mahmul H.F</span><div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"><span class="dash">—</span><input type="number" class="score-sm" min="0" placeholder="0" oninput="markFilled(this)" inputmode="numeric"></div><span class="rr-team right">Eko M, Fajar S</span></div>
+        </div>
       </div>
     </div>
-    </div>
-
-    <!-- Sub-panel Putri -->
     <div class="sub-panel" id="sub-pp-putri">
-      <div class="rr-group">
-      <div class="rr-group-title">Jadwal pertandingan akan diumumkan</div>
-      <div class="bracket-info">
-        <p>Data jadwal Pimpong Ganda Putri belum tersedia. Akan diperbarui setelah data resmi diterima.</p>
-      </div>
-    </div>
+      <div class="bracket-info"><p>Data jadwal Pimpong Ganda Putri belum tersedia. Akan diperbarui setelah data resmi diterima.</p></div>
     </div>
   </div>
 
   <!-- ══ NASI GORENG ══ -->
   <div class="tab-panel" id="panel-nasigoreng">
-    <div class="section-title">
-      <h3>🍳 Nasi Goreng</h3>
-      <span class="pill">Turnamen</span>
-    </div>
-    <div class="bracket-info">
-      <p>Jadwal dan data pertandingan <strong>Nasi Goreng</strong> akan segera diumumkan oleh panitia. Pantau terus halaman ini untuk informasi terbaru.</p>
-    </div>
-    <div style="text-align:center; padding:40px 20px;">
-      <div style="font-size:56px; margin-bottom:12px;">🍳</div>
-      <div style="color:var(--muted); font-size:14px;">Data belum tersedia.<br>Hubungi panitia untuk info terbaru.</div>
-    </div>
+    <div class="section-title"><h3>🍳 Nasi Goreng</h3><span class="pill">Turnamen</span></div>
+    <div class="bracket-info"><p>Jadwal pertandingan <strong>Nasi Goreng</strong> akan segera diumumkan. Pantau terus halaman ini.</p></div>
+    <div class="empty-state"><div class="icon">🍳</div><p>Data belum tersedia.<br>Hubungi panitia untuk info terbaru.</p></div>
   </div>
 
   <!-- ══ GAPLE ══ -->
   <div class="tab-panel" id="panel-gaple">
-    <div class="section-title">
-      <h3>🀱 Gaple</h3>
-      <span class="pill">Turnamen</span>
-    </div>
-    <div class="bracket-info">
-      <p>Jadwal dan data pertandingan <strong>Gaple</strong> akan segera diumumkan oleh panitia. Pantau terus halaman ini untuk informasi terbaru.</p>
-    </div>
-    <div style="text-align:center; padding:40px 20px;">
-      <div style="font-size:56px; margin-bottom:12px;">🀱</div>
-      <div style="color:var(--muted); font-size:14px;">Data belum tersedia.<br>Hubungi panitia untuk info terbaru.</div>
-    </div>
+    <div class="section-title"><h3>🀱 Gaple</h3><span class="pill">Turnamen</span></div>
+    <div class="bracket-info"><p>Jadwal pertandingan <strong>Gaple</strong> akan segera diumumkan. Pantau terus halaman ini.</p></div>
+    <div class="empty-state"><div class="icon">🀱</div><p>Data belum tersedia.<br>Hubungi panitia untuk info terbaru.</p></div>
   </div>
 
   <!-- ══ PLAYSTATION ══ -->
   <div class="tab-panel" id="panel-playstation">
-    <div class="section-title">
-      <h3>🕹️ PlayStation</h3>
-      <span class="pill">Turnamen</span>
-    </div>
-    <div class="bracket-info">
-      <p>Jadwal dan data pertandingan <strong>PlayStation</strong> akan segera diumumkan oleh panitia. Pantau terus halaman ini untuk informasi terbaru.</p>
-    </div>
-    <div style="text-align:center; padding:40px 20px;">
-      <div style="font-size:56px; margin-bottom:12px;">🕹️</div>
-      <div style="color:var(--muted); font-size:14px;">Data belum tersedia.<br>Hubungi panitia untuk info terbaru.</div>
-    </div>
+    <div class="section-title"><h3>🕹️ PlayStation</h3><span class="pill">Turnamen</span></div>
+    <div class="bracket-info"><p>Jadwal pertandingan <strong>PlayStation</strong> akan segera diumumkan. Pantau terus halaman ini.</p></div>
+    <div class="empty-state"><div class="icon">🕹️</div><p>Data belum tersedia.<br>Hubungi panitia untuk info terbaru.</p></div>
   </div>
 
   <!-- ══ MARS RSUD ══ -->
   <div class="tab-panel" id="panel-mars">
-    <div class="section-title">
-      <h3>🎵 MARS RSUD Sungai Lilin</h3>
-      <span class="pill">HUT Ke-18</span>
-    </div>
-    <div class="bracket-info">
-      <p>Konten <strong>MARS RSUD Sungai Lilin</strong> akan segera tersedia. Pantau terus halaman ini untuk informasi terbaru.</p>
-    </div>
-    <div style="text-align:center; padding:40px 20px;">
-      <div style="font-size:56px; margin-bottom:12px;">🎵</div>
-      <div style="color:var(--muted); font-size:14px;">Konten belum tersedia.<br>Hubungi panitia untuk info terbaru.</div>
-    </div>
+    <div class="section-title"><h3>🎵 MARS RSUD Sungai Lilin</h3><span class="pill">HUT Ke-18</span></div>
+    <div class="bracket-info"><p>Konten <strong>MARS RSUD Sungai Lilin</strong> akan segera tersedia.</p></div>
+    <div class="empty-state"><div class="icon">🎵</div><p>Konten belum tersedia.<br>Hubungi panitia untuk info terbaru.</p></div>
   </div>
 
   <!-- ══ VIDEO EDUKASI ══ -->
   <div class="tab-panel" id="panel-videoedukasi">
-    <div class="section-title">
-      <h3>🎬 Video Edukasi</h3>
-      <span class="pill">Edukasi</span>
-    </div>
-    <div class="bracket-info">
-      <p>Konten <strong>Video Edukasi</strong> akan segera tersedia. Pantau terus halaman ini untuk informasi terbaru.</p>
-    </div>
-    <div style="text-align:center; padding:40px 20px;">
-      <div style="font-size:56px; margin-bottom:12px;">🎬</div>
-      <div style="color:var(--muted); font-size:14px;">Video belum tersedia.<br>Hubungi panitia untuk info terbaru.</div>
-    </div>
+    <div class="section-title"><h3>🎬 Video Edukasi</h3><span class="pill">Edukasi</span></div>
+    <div class="bracket-info"><p>Konten <strong>Video Edukasi</strong> akan segera tersedia.</p></div>
+    <div class="empty-state"><div class="icon">🎬</div><p>Video belum tersedia.<br>Hubungi panitia untuk info terbaru.</p></div>
   </div>
 
   <!-- ══ MLBB ══ -->
   <div class="tab-panel" id="panel-mlbb">
-    <div class="section-title">
-      <h3>🎮 Turnamen MLBB</h3>
-      <span class="pill">Matchday 1</span>
-    </div>
+    <div class="section-title"><h3>🎮 Turnamen MLBB</h3><span class="pill">Matchday 1</span></div>
     <div class="rr-group-title">Matchday 1 — Rabu, 10 Juni 2026</div>
     <div class="mlbb-grid">
-
       <div class="mlbb-match" data-id="mlbb-1">
-        <div class="time-badge"><div class="time">14.00</div><div class="wib">WIB</div></div>
-        <div class="mlbb-team"><span class="team-num">TIM 1</span>dr. Makarim · Deni Andrian<br>dr. Rio · Yosi · Wulan Nopitasari</div>
-        <div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-1" data-side="left" oninput="updateScoreML(this)"><span class="dash" style="font-size:12px">VS</span><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-1" data-side="right" oninput="updateScoreML(this)"></div>
-        <div class="mlbb-team" style="text-align:right"><span class="team-num" style="text-align:right">TIM 8</span>dr. Asoly SpOG · M Tomy<br>Kristian · Agung Mukti · Septi</div>
+        <div class="mlbb-inner">
+          <div class="time-badge"><div class="time">14.00</div><div class="wib">WIB</div></div>
+          <div class="mlbb-team"><span class="team-num">TIM 1</span>dr. Makarim · Deni Andrian · dr. Rio · Yosi · Wulan N.</div>
+          <div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-1" data-side="left" oninput="updateScoreML(this)" inputmode="numeric"><span class="dash" style="font-size:11px">VS</span><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-1" data-side="right" oninput="updateScoreML(this)" inputmode="numeric"></div>
+          <div class="mlbb-team" style="text-align:right"><span class="team-num" style="text-align:right">TIM 8</span>dr. Asoly SpOG · M Tomy · Kristian · Agung M · Septi</div>
+        </div>
       </div>
-
       <div class="mlbb-match" data-id="mlbb-2">
-        <div class="time-badge"><div class="time">14.45</div><div class="wib">WIB</div></div>
-        <div class="mlbb-team"><span class="team-num">TIM 2</span>dr. Tian · Alvin Muarman<br>Handoko · dr. Alan · Alvan Muarman</div>
-        <div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-2" data-side="left" oninput="updateScoreML(this)"><span class="dash" style="font-size:12px">VS</span><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-2" data-side="right" oninput="updateScoreML(this)"></div>
-        <div class="mlbb-team" style="text-align:right"><span class="team-num" style="text-align:right">TIM 7</span>PALMA · Yohan<br>M. Gibran · Akka · Dodi Superman</div>
+        <div class="mlbb-inner">
+          <div class="time-badge"><div class="time">14.45</div><div class="wib">WIB</div></div>
+          <div class="mlbb-team"><span class="team-num">TIM 2</span>dr. Tian · Alvin M · Handoko · dr. Alan · Alvan M</div>
+          <div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-2" data-side="left" oninput="updateScoreML(this)" inputmode="numeric"><span class="dash" style="font-size:11px">VS</span><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-2" data-side="right" oninput="updateScoreML(this)" inputmode="numeric"></div>
+          <div class="mlbb-team" style="text-align:right"><span class="team-num" style="text-align:right">TIM 7</span>PALMA · Yohan · M. Gibran · Akka · Dodi Superman</div>
+        </div>
       </div>
-
       <div class="mlbb-match" data-id="mlbb-3">
-        <div class="time-badge"><div class="time">15.30</div><div class="wib">WIB</div></div>
-        <div class="mlbb-team"><span class="team-num">TIM 3</span>Rudi Prantoso · T. Affandi<br>Alif Khan · Jhoni · Fajar Sangkuriang</div>
-        <div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-3" data-side="left" oninput="updateScoreML(this)"><span class="dash" style="font-size:12px">VS</span><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-3" data-side="right" oninput="updateScoreML(this)"></div>
-        <div class="mlbb-team" style="text-align:right"><span class="team-num" style="text-align:right">TIM 6</span>Aris Munandar · Endri Kusuma<br>Budi Utomo · Suandi · Dewi Sutarti</div>
+        <div class="mlbb-inner">
+          <div class="time-badge"><div class="time">15.30</div><div class="wib">WIB</div></div>
+          <div class="mlbb-team"><span class="team-num">TIM 3</span>Rudi P · T. Affandi · Alif Khan · Jhoni · Fajar S</div>
+          <div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-3" data-side="left" oninput="updateScoreML(this)" inputmode="numeric"><span class="dash" style="font-size:11px">VS</span><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-3" data-side="right" oninput="updateScoreML(this)" inputmode="numeric"></div>
+          <div class="mlbb-team" style="text-align:right"><span class="team-num" style="text-align:right">TIM 6</span>Aris M · Endri K · Budi U · Suandi · Dewi S</div>
+        </div>
       </div>
-
       <div class="mlbb-match" data-id="mlbb-4">
-        <div class="time-badge"><div class="time">16.15</div><div class="wib">WIB</div></div>
-        <div class="mlbb-team"><span class="team-num">TIM 4</span>Riska Indri Ani · dr. Agung<br>Shadiqi · Aldi Frediyansyah · Heri</div>
-        <div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-4" data-side="left" oninput="updateScoreML(this)"><span class="dash" style="font-size:12px">VS</span><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-4" data-side="right" oninput="updateScoreML(this)"></div>
-        <div class="mlbb-team" style="text-align:right"><span class="team-num" style="text-align:right">TIM 5</span>Ifan Haryadi · Dwiyan Rapika<br>Cextra · Yusuf R · M. Roby</div>
+        <div class="mlbb-inner">
+          <div class="time-badge"><div class="time">16.15</div><div class="wib">WIB</div></div>
+          <div class="mlbb-team"><span class="team-num">TIM 4</span>Riska I.A · dr. Agung · Shadiqi · Aldi F · Heri</div>
+          <div class="rr-score"><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-4" data-side="left" oninput="updateScoreML(this)" inputmode="numeric"><span class="dash" style="font-size:11px">VS</span><input type="number" class="score-sm" min="0" placeholder="0" data-match="mlbb-4" data-side="right" oninput="updateScoreML(this)" inputmode="numeric"></div>
+          <div class="mlbb-team" style="text-align:right"><span class="team-num" style="text-align:right">TIM 5</span>Ifan H · Dwiyan R · Cextra · Yusuf R · M. Roby</div>
+        </div>
       </div>
-
     </div>
   </div>
 
   <!-- ══ JADWAL ══ -->
   <div class="tab-panel" id="panel-jadwal">
-    <div class="section-title">
-      <h3>📋 Jadwal Pertandingan</h3>
-      <span class="pill">Resmi Panitia</span>
-    </div>
-
-    <!-- Upload area (only visible to panitia) -->
-    <div id="jadwal-upload-box" style="display:none; margin-bottom:24px;">
+    <div class="section-title"><h3>📋 Jadwal Pertandingan</h3><span class="pill">Resmi Panitia</span></div>
+    <div id="jadwal-upload-box" style="display:none; margin-bottom:20px;">
       <div class="bracket-info" style="border-color:rgba(245,166,35,0.4);">
-        <p style="color:var(--gold); font-weight:700; margin-bottom:12px;">⚙️ Panel Panitia — Upload Gambar Jadwal</p>
-        <p style="margin-bottom:16px; color:var(--muted);">Upload gambar jadwal pertandingan (JPG, PNG, dll). Gambar akan langsung tampil untuk semua pegawai.</p>
+        <p style="color:var(--gold); font-weight:700; margin-bottom:10px;">⚙️ Panel Panitia — Upload Gambar Jadwal</p>
+        <p style="margin-bottom:14px; color:var(--muted);">Upload gambar jadwal (JPG, PNG). Langsung tampil untuk semua pegawai.</p>
         <div id="jadwal-dropzone" onclick="document.getElementById('jadwal-file-input').click()"
-          style="border:2px dashed var(--border); border-radius:10px; padding:32px 20px; text-align:center; cursor:pointer; transition:all 0.2s; background:rgba(7,24,48,0.5);">
-          <div style="font-size:36px; margin-bottom:8px;">📁</div>
-          <div style="font-size:14px; color:var(--muted);">Klik atau seret gambar ke sini</div>
-          <div style="font-size:11px; color:var(--muted); margin-top:4px;">JPG, PNG, WEBP — Maks 5MB per gambar</div>
+          style="border:2px dashed var(--border); border-radius:10px; padding:24px 16px; text-align:center; cursor:pointer; background:rgba(7,24,48,0.5);">
+          <div style="font-size:32px; margin-bottom:8px;">📁</div>
+          <div style="font-size:14px; color:var(--muted);">Ketuk untuk pilih gambar</div>
+          <div style="font-size:11px; color:var(--muted); margin-top:4px;">JPG, PNG, WEBP — Maks 5MB</div>
         </div>
         <input type="file" id="jadwal-file-input" accept="image/*" multiple style="display:none" onchange="handleJadwalUpload(this)">
         <div id="jadwal-upload-status" style="font-size:12px; color:var(--green); margin-top:10px; min-height:18px;"></div>
-        <div id="jadwal-manage" style="margin-top:14px; display:none;">
-          <button onclick="clearAllJadwal()" style="background:rgba(239,83,80,0.12); border:1px solid rgba(239,83,80,0.3); color:var(--red); font-size:12px; font-weight:600; padding:6px 16px; border-radius:6px; cursor:pointer;">🗑 Hapus Semua Gambar</button>
+        <div id="jadwal-manage" style="margin-top:12px; display:none;">
+          <button onclick="clearAllJadwal()" style="background:rgba(239,83,80,0.12); border:1px solid rgba(239,83,80,0.3); color:var(--red); font-size:12px; font-weight:600; padding:8px 16px; border-radius:6px; cursor:pointer; touch-action:manipulation;">🗑 Hapus Semua Gambar</button>
         </div>
       </div>
     </div>
-
-    <!-- Empty state -->
-    <div id="jadwal-empty" style="text-align:center; padding:60px 20px;">
-      <div style="font-size:48px; margin-bottom:12px;">📭</div>
-      <div style="color:var(--muted); font-size:14px;">Belum ada jadwal yang diupload.<br>Hubungi panitia untuk info terbaru.</div>
-    </div>
-
-    <!-- Gallery -->
-    <div id="jadwal-gallery" style="display:none; display:flex; flex-direction:column; gap:16px;"></div>
+    <div id="jadwal-empty" class="empty-state"><div class="icon">📭</div><p>Belum ada jadwal yang diupload.<br>Hubungi panitia untuk info terbaru.</p></div>
+    <div id="jadwal-gallery" style="display:none; flex-direction:column; gap:14px;"></div>
   </div>
 
 </div><!-- /content -->
 
-<!-- Save bar (admin only) -->
 <div class="save-bar hidden" id="save-bar">
   <button class="save-btn" onclick="saveScores()">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
@@ -720,11 +746,10 @@
   </button>
 </div>
 
-<!-- Viewer lock notice -->
 <div class="lock-notice" id="lock-notice">
   <div class="inner">
     👁 Mode Penonton
-    <button onclick="showLoginOverlay()">🔑 Login Admin / Panitia</button>
+    <button onclick="showLoginOverlay()">🔑 Login Admin</button>
   </div>
 </div>
 
@@ -732,67 +757,28 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// ══════════════════════════════════════════════════════════════
-//  SUPABASE CONFIG — ganti dengan Project URL & Anon Key kamu
-//  Dashboard: https://supabase.com/dashboard → Settings → API
-// ══════════════════════════════════════════════════════════════
-const SUPABASE_URL  = 'https://apuuuehtqbnjibvykwqj.supabase.co';   // contoh: https://xyzabc.supabase.co
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwdXV1ZWh0cWJuamlidnlrd3FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwNTQ1MjEsImV4cCI6MjA5NjYzMDUyMX0.QWA0VA71kmFiXPel2aGu97IUyfUuX7nV6fLxiHmF948';      // Public anon key
-
+const SUPABASE_URL  = 'https://apuuuehtqbnjibvykwqj.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwdXV1ZWh0cWJuamlidnlrd3FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwNTQ1MjEsImV4cCI6MjA5NjYzMDUyMX0.QWA0VA71kmFiXPel2aGu97IUyfUuX7nV6fLxiHmF948';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
-// ══════════════════════════════════════════════════════════════
-//  SQL SETUP — jalankan sekali di Supabase SQL Editor:
-//
-//  CREATE TABLE IF NOT EXISTS scores (
-//    match_key TEXT PRIMARY KEY,
-//    value     TEXT NOT NULL DEFAULT '',
-//    updated_at TIMESTAMPTZ DEFAULT NOW()
-//  );
-//
-//  CREATE TABLE IF NOT EXISTS jadwal_images (
-//    id         BIGSERIAL PRIMARY KEY,
-//    name       TEXT,
-//    data       TEXT NOT NULL,
-//    uploaded_by TEXT,
-//    uploaded_at TIMESTAMPTZ DEFAULT NOW()
-//  );
-//
-//  -- Izinkan semua orang baca (penonton), hanya authenticated write:
-//  ALTER TABLE scores       ENABLE ROW LEVEL SECURITY;
-//  ALTER TABLE jadwal_images ENABLE ROW LEVEL SECURITY;
-//
-//  CREATE POLICY "read_scores"  ON scores        FOR SELECT USING (true);
-//  CREATE POLICY "write_scores" ON scores        FOR ALL    USING (true);
-//  CREATE POLICY "read_jadwal"  ON jadwal_images FOR SELECT USING (true);
-//  CREATE POLICY "write_jadwal" ON jadwal_images FOR ALL    USING (true);
-// ══════════════════════════════════════════════════════════════
-
-// ── CREDENTIALS ──
 const ADMINS = { 'admin': 'rsud2026', 'panitia': 'sungaililin18' };
+let isAdmin = false, currentUser = null, currentPanel = null;
 
-let isAdmin = false;
-let currentUser = null;
-let currentPanel = null;
-
-// ── LOGIN / LOGOUT ──
 function doLogin() {
   const u = document.getElementById('login-user').value.trim();
   const p = document.getElementById('login-pass').value;
   if (ADMINS[u] && ADMINS[u] === p) {
-    isAdmin = true;
-    currentUser = u;
+    isAdmin = true; currentUser = u;
     try { sessionStorage.setItem('tournament_admin', u); } catch(e){}
     document.getElementById('login-overlay').classList.add('hidden');
     document.getElementById('admin-bar').classList.add('show');
     const roleLabel = u === 'admin' ? 'ADMIN' : 'PANITIA';
     const roleColor = u === 'admin' ? 'var(--gold)' : 'var(--cyan)';
     document.getElementById('admin-username-display').innerHTML =
-      `— <span style="color:${roleColor};font-weight:800;letter-spacing:1px;">${roleLabel}</span> <span style="color:var(--muted);font-weight:400;">(${u})</span>`;
+      `— <span style="color:${roleColor};font-weight:800;">${roleLabel}</span> <span style="color:var(--muted);font-weight:400;">(${u})</span>`;
     document.getElementById('save-bar').classList.remove('hidden');
     document.getElementById('lock-notice').classList.add('hidden');
     setInputsLocked(false);
-    // Kedua akun bisa upload jadwal dan update score
     const uploadBox = document.getElementById('jadwal-upload-box');
     if (uploadBox) uploadBox.style.display = 'block';
     showToast('✓ Login berhasil. Selamat datang, ' + u + '!', 'success');
@@ -812,8 +798,7 @@ function closeLoginOverlay() {
 }
 
 function doLogout() {
-  isAdmin = false;
-  currentUser = null;
+  isAdmin = false; currentUser = null;
   try { sessionStorage.removeItem('tournament_admin'); } catch(e){}
   document.getElementById('admin-bar').classList.remove('show');
   document.getElementById('save-bar').classList.add('hidden');
@@ -836,32 +821,27 @@ function setInputsLocked(locked) {
   });
 }
 
-// ── NAV ──
 function switchTab(panelId) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active','parent-active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('panel-' + panelId).classList.add('active');
-  document.getElementById('btn-' + panelId).classList.add('active');
+  const btn = document.getElementById('btn-' + panelId);
+  btn.classList.add('active');
+  // Auto-scroll tab into view on mobile
+  btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   currentPanel = panelId;
 }
 
-// Sub-tab inside Badminton / Pimpong
 function switchSub(subId, parentTab) {
-  // Only switch sub-panels within the active parent
   const prefix = parentTab === 'badminton' ? 'ganda' : 'pp';
-  document.querySelectorAll('[id^="sub-' + prefix + '-"], [id^="sub-pp-"]').forEach(p => {
-    if (p.id.startsWith('sub-' + (parentTab === 'badminton' ? 'ganda' : 'pp'))) p.classList.remove('active');
-  });
-  document.querySelectorAll('[id^="sbtn-' + prefix + '-"], [id^="sbtn-pp-"]').forEach(b => {
-    if (b.id.startsWith('sbtn-' + (parentTab === 'badminton' ? 'ganda' : 'pp'))) b.classList.remove('active');
-  });
+  document.querySelectorAll(`[id^="sub-${prefix}-"]`).forEach(p => p.classList.remove('active'));
+  document.querySelectorAll(`[id^="sbtn-${prefix}-"]`).forEach(b => b.classList.remove('active'));
   const subEl = document.getElementById('sub-' + subId);
   const sbtnEl = document.getElementById('sbtn-' + subId);
   if (subEl) subEl.classList.add('active');
   if (sbtnEl) sbtnEl.classList.add('active');
 }
 
-// ── SCORE UPDATE for big cards ──
 function updateScore(input) {
   if (!isAdmin) return;
   const matchId = input.dataset.match;
@@ -908,109 +888,77 @@ function markFilled(input) {
   row.classList.toggle('has-winner', [...all].every(i => i.value !== ''));
 }
 
-// ── SAVE / LOAD SCORES (Supabase) ──
 async function saveScores() {
   const btn = document.querySelector('.save-btn');
   if (btn) { btn.textContent = '⏳ Menyimpan...'; btn.disabled = true; }
-
   const rows = [];
   document.querySelectorAll('input[type="number"]').forEach((inp, idx) => {
-    const key = inp.dataset.match
-      ? `${inp.dataset.match}-${inp.dataset.side || idx}`
-      : `inp-${idx}`;
+    const key = inp.dataset.match ? `${inp.dataset.match}-${inp.dataset.side || idx}` : `inp-${idx}`;
     rows.push({ match_key: key, value: inp.value });
   });
-
   const { error } = await sb.from('scores').upsert(rows, { onConflict: 'match_key' });
-
   if (btn) {
     btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Simpan Skor`;
     btn.disabled = false;
   }
-
-  if (error) {
-    console.error('saveScores error:', error);
-    showToast('✗ Gagal menyimpan ke database!', 'error');
-  } else {
-    showToast('✓ Skor berhasil disimpan!', 'success');
-  }
+  if (error) { showToast('✗ Gagal menyimpan!', 'error'); }
+  else { showToast('✓ Skor berhasil disimpan!', 'success'); }
 }
 
 async function loadScores() {
   const { data, error } = await sb.from('scores').select('match_key, value');
   if (error || !data) return;
-
   const map = {};
   data.forEach(r => { map[r.match_key] = r.value; });
-
   document.querySelectorAll('input[type="number"]').forEach((inp, idx) => {
-    const key = inp.dataset.match
-      ? `${inp.dataset.match}-${inp.dataset.side || idx}`
-      : `inp-${idx}`;
+    const key = inp.dataset.match ? `${inp.dataset.match}-${inp.dataset.side || idx}` : `inp-${idx}`;
     if (map[key] !== undefined && map[key] !== '') {
-      inp.value = map[key];
-      inp.classList.add('filled');
+      inp.value = map[key]; inp.classList.add('filled');
       const tmp = isAdmin; isAdmin = true;
-      if (inp.dataset.match && inp.closest('.match-card'))      updateScore(inp);
+      if (inp.dataset.match && inp.closest('.match-card')) updateScore(inp);
       else if (inp.dataset.match && inp.closest('.mlbb-match')) updateScoreML(inp);
-      else                                                       markFilled(inp);
+      else markFilled(inp);
       isAdmin = tmp;
     }
   });
 }
 
-// ── TOAST ──
 function showToast(msg, type) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast ' + type + ' show';
+  t.textContent = msg; t.className = 'toast ' + type + ' show';
   setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-// ── JADWAL IMAGE UPLOAD (Supabase) ──
 async function loadJadwalImages() {
-  const { data, error } = await sb.from('jadwal_images')
-    .select('id, name, data, uploaded_by, uploaded_at')
-    .order('uploaded_at', { ascending: true });
+  const { data, error } = await sb.from('jadwal_images').select('id, name, data, uploaded_by, uploaded_at').order('uploaded_at', { ascending: true });
   if (error) { renderJadwalGallery([]); return; }
   renderJadwalGallery(data || []);
 }
 
 function renderJadwalGallery(images) {
   const gallery = document.getElementById('jadwal-gallery');
-  const empty   = document.getElementById('jadwal-empty');
-  const manage  = document.getElementById('jadwal-manage');
+  const empty = document.getElementById('jadwal-empty');
+  const manage = document.getElementById('jadwal-manage');
   gallery.innerHTML = '';
   if (!images || images.length === 0) {
-    empty.style.display = 'block';
-    gallery.style.display = 'none';
-    if (manage) manage.style.display = 'none';
-    return;
+    empty.style.display = 'block'; gallery.style.display = 'none';
+    if (manage) manage.style.display = 'none'; return;
   }
-  empty.style.display = 'none';
-  gallery.style.display = 'flex';
-  gallery.style.flexDirection = 'column';
-  gallery.style.gap = '16px';
+  empty.style.display = 'none'; gallery.style.display = 'flex';
   if (manage) manage.style.display = isAdmin ? 'block' : 'none';
-
   images.forEach(img => {
-    const tanggal = img.uploaded_at
-      ? new Date(img.uploaded_at).toLocaleDateString('id-ID', {day:'numeric',month:'long',year:'numeric'})
-      : '';
+    const tanggal = img.uploaded_at ? new Date(img.uploaded_at).toLocaleDateString('id-ID', {day:'numeric',month:'long',year:'numeric'}) : '';
     const wrap = document.createElement('div');
     wrap.style.cssText = 'background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;';
     const info = document.createElement('div');
-    info.style.cssText = 'padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);';
-    info.innerHTML = `<span style="font-size:12px;color:var(--muted);">📸 ${img.name || 'Jadwal'} &nbsp;·&nbsp; ${tanggal} &nbsp;·&nbsp; <span style="color:var(--cyan);">${img.uploaded_by || ''}</span></span>`
-      + (isAdmin ? `<button onclick="deleteJadwalImage(${img.id})" style="background:rgba(239,83,80,0.12);border:1px solid rgba(239,83,80,0.3);color:var(--red);font-size:11px;font-weight:600;padding:3px 10px;border-radius:5px;cursor:pointer;">Hapus</button>` : '');
+    info.style.cssText = 'padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);gap:8px;';
+    info.innerHTML = `<span style="font-size:11px;color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">📸 ${img.name || 'Jadwal'} · ${tanggal}</span>`
+      + (isAdmin ? `<button onclick="deleteJadwalImage(${img.id})" style="background:rgba(239,83,80,0.12);border:1px solid rgba(239,83,80,0.3);color:var(--red);font-size:11px;font-weight:600;padding:5px 10px;border-radius:5px;cursor:pointer;flex-shrink:0;touch-action:manipulation;">Hapus</button>` : '');
     const image = document.createElement('img');
-    image.src = img.data;
-    image.alt = img.name || 'Jadwal';
+    image.src = img.data; image.alt = img.name || 'Jadwal';
     image.style.cssText = 'width:100%;display:block;cursor:zoom-in;max-height:80vh;object-fit:contain;background:#071830;';
     image.onclick = () => openLightbox(img.data, img.name);
-    wrap.appendChild(info);
-    wrap.appendChild(image);
-    gallery.appendChild(wrap);
+    wrap.appendChild(info); wrap.appendChild(image); gallery.appendChild(wrap);
   });
 }
 
@@ -1018,31 +966,17 @@ function handleJadwalUpload(input) {
   const files = Array.from(input.files);
   if (!files.length) return;
   const status = document.getElementById('jadwal-upload-status');
-  status.style.color = 'var(--muted)';
-  status.textContent = '⏳ Mengupload...';
+  status.style.color = 'var(--muted)'; status.textContent = '⏳ Mengupload...';
   let done = 0;
   files.forEach(file => {
-    if (file.size > 5 * 1024 * 1024) {
-      status.style.color = 'var(--red)';
-      status.textContent = '✗ ' + file.name + ' terlalu besar (maks 5MB)';
-      return;
-    }
+    if (file.size > 5 * 1024 * 1024) { status.style.color = 'var(--red)'; status.textContent = '✗ ' + file.name + ' terlalu besar (maks 5MB)'; return; }
     const reader = new FileReader();
     reader.onload = async e => {
-      const tanggal = new Date().toLocaleDateString('id-ID', {day:'numeric',month:'long',year:'numeric'});
-      const { error } = await sb.from('jadwal_images').insert({
-        name: file.name,
-        data: e.target.result,
-        uploaded_by: currentUser,
-        uploaded_at: new Date().toISOString()
-      });
+      const { error } = await sb.from('jadwal_images').insert({ name: file.name, data: e.target.result, uploaded_by: currentUser, uploaded_at: new Date().toISOString() });
       done++;
-      if (error) {
-        status.style.color = 'var(--red)';
-        status.textContent = '✗ Gagal upload: ' + error.message;
-      } else if (done === files.length) {
-        status.style.color = 'var(--green)';
-        status.textContent = '✓ ' + done + ' gambar berhasil diupload!';
+      if (error) { status.style.color = 'var(--red)'; status.textContent = '✗ Gagal upload: ' + error.message; }
+      else if (done === files.length) {
+        status.style.color = 'var(--green)'; status.textContent = '✓ ' + done + ' gambar berhasil diupload!';
         showToast('✓ Jadwal berhasil diupload!', 'success');
         setTimeout(() => { status.textContent = ''; }, 3000);
         loadJadwalImages();
@@ -1057,71 +991,52 @@ async function deleteJadwalImage(id) {
   if (!confirm('Hapus gambar ini?')) return;
   const { error } = await sb.from('jadwal_images').delete().eq('id', id);
   if (error) { showToast('✗ Gagal menghapus!', 'error'); return; }
-  showToast('Gambar dihapus.', 'success');
-  loadJadwalImages();
+  showToast('Gambar dihapus.', 'success'); loadJadwalImages();
 }
 
 async function clearAllJadwal() {
-  if (!confirm('Hapus SEMUA gambar jadwal? Tindakan ini tidak bisa dibatalkan.')) return;
+  if (!confirm('Hapus SEMUA gambar jadwal?')) return;
   const { error } = await sb.from('jadwal_images').delete().neq('id', 0);
   if (error) { showToast('✗ Gagal menghapus semua!', 'error'); return; }
-  renderJadwalGallery([]);
-  showToast('Semua gambar jadwal dihapus.', 'success');
+  renderJadwalGallery([]); showToast('Semua gambar jadwal dihapus.', 'success');
 }
 
-// ── LIGHTBOX ──
 function openLightbox(src, name) {
   let lb = document.getElementById('lightbox');
   if (!lb) {
-    lb = document.createElement('div');
-    lb.id = 'lightbox';
-    lb.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;padding:20px;';
-    lb.onclick = () => lb.remove();
-    document.body.appendChild(lb);
+    lb = document.createElement('div'); lb.id = 'lightbox';
+    lb.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:99999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;padding:16px;';
+    lb.onclick = () => lb.remove(); document.body.appendChild(lb);
   }
-  lb.innerHTML = `<img src="${src}" alt="${name||''}" style="max-width:100%;max-height:100%;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.8);">
-    <button onclick="event.stopPropagation();document.getElementById('lightbox').remove()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.15);border:none;color:#fff;font-size:22px;width:40px;height:40px;border-radius:50%;cursor:pointer;">✕</button>`;
+  lb.innerHTML = `<img src="${src}" alt="${name||''}" style="max-width:100%;max-height:100%;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.8);touch-action:pinch-zoom;">
+    <button onclick="event.stopPropagation();document.getElementById('lightbox').remove()" style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.2);border:none;color:#fff;font-size:20px;width:40px;height:40px;border-radius:50%;cursor:pointer;touch-action:manipulation;">✕</button>`;
   lb.style.display = 'flex';
 }
 
-// Dropzone drag support
 document.addEventListener('DOMContentLoaded', () => {
-  // ── LIVE CLOCK ──
   const HARI = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
   const BULAN = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
   function updateClock() {
-    // WIB = UTC+7
     const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }));
-    const hari  = HARI[now.getDay()];
-    const tgl   = now.getDate();
-    const bln   = BULAN[now.getMonth()];
-    const thn   = now.getFullYear();
-    const hh    = String(now.getHours()).padStart(2,'0');
-    const mm    = String(now.getMinutes()).padStart(2,'0');
-    const ss    = String(now.getSeconds()).padStart(2,'0');
-    document.getElementById('live-date').textContent = `${hari}, ${tgl} ${bln} ${thn}`;
-    document.getElementById('live-time').textContent = `${hh}:${mm}:${ss}`;
+    document.getElementById('live-date').textContent = `${HARI[now.getDay()]}, ${now.getDate()} ${BULAN[now.getMonth()]} ${now.getFullYear()}`;
+    document.getElementById('live-time').textContent = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
   }
-  updateClock();
-  setInterval(updateClock, 1000);
+  updateClock(); setInterval(updateClock, 1000);
 
-  // Start langsung mode penonton
   setInputsLocked(true);
   loadScores();
   loadJadwalImages();
   switchTab('badminton');
 
-  // ── RESTORE SESSION (tetap login setelah refresh) ──
   try {
     const savedUser = sessionStorage.getItem('tournament_admin');
     if (savedUser && ADMINS[savedUser]) {
-      isAdmin = true;
-      currentUser = savedUser;
+      isAdmin = true; currentUser = savedUser;
       document.getElementById('admin-bar').classList.add('show');
       const roleLabel = savedUser === 'admin' ? 'ADMIN' : 'PANITIA';
       const roleColor = savedUser === 'admin' ? 'var(--gold)' : 'var(--cyan)';
       document.getElementById('admin-username-display').innerHTML =
-        `— <span style="color:${roleColor};font-weight:800;letter-spacing:1px;">${roleLabel}</span> <span style="color:var(--muted);font-weight:400;">(${savedUser})</span>`;
+        `— <span style="color:${roleColor};font-weight:800;">${roleLabel}</span> <span style="color:var(--muted);font-weight:400;">(${savedUser})</span>`;
       document.getElementById('save-bar').classList.remove('hidden');
       document.getElementById('lock-notice').classList.add('hidden');
       setInputsLocked(false);
@@ -1132,18 +1047,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const dz = document.getElementById('jadwal-dropzone');
   if (dz) {
-    dz.addEventListener('dragover', e => { e.preventDefault(); dz.style.borderColor = 'var(--gold)'; dz.style.background = 'rgba(245,166,35,0.06)'; });
-    dz.addEventListener('dragleave', () => { dz.style.borderColor = 'var(--border)'; dz.style.background = 'rgba(7,24,48,0.5)'; });
+    dz.addEventListener('dragover', e => { e.preventDefault(); dz.style.borderColor = 'var(--gold)'; });
+    dz.addEventListener('dragleave', () => { dz.style.borderColor = 'var(--border)'; });
     dz.addEventListener('drop', e => {
-      e.preventDefault();
-      dz.style.borderColor = 'var(--border)'; dz.style.background = 'rgba(7,24,48,0.5)';
+      e.preventDefault(); dz.style.borderColor = 'var(--border)';
       const fi = document.getElementById('jadwal-file-input');
-      fi.files = e.dataTransfer.files;
-      handleJadwalUpload(fi);
+      fi.files = e.dataTransfer.files; handleJadwalUpload(fi);
     });
   }
 });
-
 </script>
 </body>
 </html>
